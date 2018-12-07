@@ -6,7 +6,7 @@
 #    By: nsondag <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/05 12:33:09 by nsondag           #+#    #+#              #
-#    Updated: 2018/12/07 16:05:37 by nsondag          ###   ########.fr        #
+#    Updated: 2018/12/07 16:11:17 by nsondag          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,6 @@ $(NAME1):
 	@make re -C libft
 	@gcc -o $(NAME1) $(FLAGS) -I mlx -g -L mlx -lmlx\
 		$(FRAME) $(SRC) $(SRC1) libft/libft.a
-	#@gcc -o $(NAME1) $(FLAGS) $(SRC) $(SRC1) libft/libft.a
 
 $(NAME2):
 	@make re -C libft
