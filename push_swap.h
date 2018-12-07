@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 09:56:52 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/02 21:51:57 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/07 15:22:34 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "libft/libft.h"
-# include <stdio.h>
 
 typedef struct	s_stack
 {
@@ -62,7 +61,5 @@ void			sort3(t_stack *a);
 void			revsort3(t_stack *a);
 void			sort5(t_stack *a, t_stack *b);
 void			revsort5(t_stack *a, t_stack *b);
-
-void			print_tab(t_stack *a, t_stack *b);
 
 #endif

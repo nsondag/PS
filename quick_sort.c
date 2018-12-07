@@ -6,24 +6,11 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 23:19:58 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/04 20:21:26 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/07 15:22:14 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	print_tab(t_stack *a, t_stack *b)
-{
-	int i;
-
-	i = 0;
-	printf("------------------------\n");
-	while (i < a->len)
-		printf("A %d\n", a->tab[i++]);
-	i = 0;
-	while (i < b->len)
-		printf("B %d\n", b->tab[i++]);
-}
 
 int		next_pivot(t_stack *stack)
 {
