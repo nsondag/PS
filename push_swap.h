@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 09:56:52 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/07 16:08:41 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/07 17:29:11 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,15 @@ typedef struct	s_stack
 
 typedef struct	s_visu
 {
+	int			bpp;
+	int			sl;
+	int			endian;
+
 	void		*mlx_ptr;
 	void		*win_ptr;
 	void		*img_ptr;
-	char		*data;
+	void		*data_ptr;
+	char		*str;
 }				t_visu;
 
 void			push_a(t_stack *a, t_stack *b, int write);
