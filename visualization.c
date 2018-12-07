@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 18:15:59 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/07 18:40:56 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/07 19:37:45 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,12 @@ void		visualization(t_stack a, t_stack b)
 		}
 		i++;
 	}
+	(void)b.tab[i];
+	//{
+	//	j = b.tab[i] + 1;
+		//while (j > 0)
+		//	mlx_pixel_put(v.mlx_ptr, v.win_ptr, i, j--, 255);
+	//	i++;
+	//}
 	mlx_loop(v.mlx_ptr);
 }
