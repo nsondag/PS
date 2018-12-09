@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 18:15:59 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/07 19:37:45 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/09 18:47:24 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,26 @@ void		visualization(t_stack a, t_stack b)
 	int		i;
 	int		j;
 	int		k;
+	int		l;
 
 	i = 0;
-	k = 0;
 	v.mlx_ptr = mlx_init();
 	v.win_ptr = mlx_new_window(v.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "PUSH_SWAP");
 	mlx_key_hook(v.win_ptr, key_hook, &v);
 	while (i < a.len)
 	{
-		j = a.tab[i];
-		while (j > 0)
+		j = 0;
+		while (j < a.tab[i])
 		{
 			k = -1;
-			while (++k < 9) 
-				mlx_pixel_put(v.mlx_ptr, v.win_ptr,
-						10 *j + k, i * 10 + k , 0xFF3300);
-			j--;
+			while (++k < 9)
+			{
+				l = -1;
+				while (++l < 9)
+					mlx_pixel_put(v.mlx_ptr, v.win_ptr,
+							10 * j + k, i * 10 + l, 0xFF3300);
+			}
+			j++;
 		}
 		i++;
 	}
@@ -54,19 +58,12 @@ void		visualization(t_stack a, t_stack b)
 		while (j > 0)
 		{
 			k = -1;
-			while (++k < 9) 
+			while (++k < 9)
 				mlx_pixel_put(v.mlx_ptr, v.win_ptr,
-						10 *j + k, i * 10 + k , 0x33FF3300);
+						10 * j + k, i * 10 + k, 0x33FF3300);
 			j--;
 		}
 		i++;
 	}
-	(void)b.tab[i];
-	//{
-	//	j = b.tab[i] + 1;
-		//while (j > 0)
-		//	mlx_pixel_put(v.mlx_ptr, v.win_ptr, i, j--, 255);
-	//	i++;
-	//}
 	mlx_loop(v.mlx_ptr);
 }
