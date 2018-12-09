@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 18:15:59 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/09 18:57:15 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/09 19:23:55 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,19 @@ void	visu_tab(t_visu v, t_stack a)
 	int j;
 	int k;
 	int l;
+	int color;
 
-	i = 0;
-	while (i < a.len)
+	i = -1;
+	while (++i < a.len)
 	{
-		j = 0;
-		while (j < a.tab[i])
+		color = 0xFF3300;
+		j = -1;
+		if (a.tab[i] < 0)
+		{
+			a.tab[i] = -a.tab[i];
+			color = 0x33FF00;
+		}
+		while (++j < a.tab[i])
 		{
 			k = -1;
 			while (++k < 9)
@@ -41,11 +48,9 @@ void	visu_tab(t_visu v, t_stack a)
 				l = -1;
 				while (++l < 9)
 					mlx_pixel_put(v.mlx_ptr, v.win_ptr,
-							10 * j + k, i * 10 + l, 0xFF3300);
+							10 * j + k, i * 10 + l, color);
 			}
-			j++;
 		}
-		i++;
 	}
 }
 
