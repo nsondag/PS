@@ -13,6 +13,7 @@ void	ft_putchar(int fd, char c)
 int		check_exist(int *tab, int n, int rand)
 {
 	int i = 0;
+
 	while (i < n)
 	{
 		if (tab[i] == rand)
@@ -44,10 +45,9 @@ int main (int ac, char **av)
 	int fd;
 	int r;
 
-	fd = open("tab.txt", O_RDWR | O_CREAT);
+	fd = open("tab.txt", O_RDWR | O_CREAT, 0755);
 	n = atoi(av[1]);
 	max = atoi(av[2]);
-	i = 0;
 	if (n < max)
 	{
 		int tab[n];
@@ -58,8 +58,14 @@ int main (int ac, char **av)
 		while (i < n)
 		{
 			r = rand() % max;
+			if (i % 2 == 0)
+				r = -r;
 			while (check_exist(&tab[0], n, r) == 0)
+			{
 				r = rand() % max;
+				if (i % 2 == 0)
+					r = -r;
+			}
 			tab[i] = r;
 			ft_putnbr(fd, r);
 			write(fd," ",1);
@@ -67,6 +73,6 @@ int main (int ac, char **av)
 		}
 	}
 	else
-		printf("Le nombre de valeur doit etre inferieur a la valeur max !");
+		printf("Le nombre de valeur doir etre inferieur a la valeur max !");
 	return(0);
 }
