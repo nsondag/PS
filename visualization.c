@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 18:15:59 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/10 13:47:21 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/10 15:13:54 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	visu_tab(t_visu v, t_stack a)
 
 void	visualization(t_stack a, t_stack b, t_visu *v)
 {
-	mlx_clear_window(v->mlx_ptr, v->win_ptr);
+	mlx_put_image_to_window(v->mlx_ptr, v->win_ptr, v->img_ptr, 0, 0);
 	mlx_key_hook(v->win_ptr, key_hook, v);
 	visu_tab(*v, a);
 	visu_tab(*v, b);

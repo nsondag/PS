@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 08:43:20 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/10 13:47:49 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/10 15:13:52 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int			main(int argc, char **argv)
 		return (0);
 	v.mlx_ptr = mlx_init();
 	v.win_ptr = mlx_new_window(v.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "PUSH_SWAP");
+	v.img_ptr = mlx_new_image(v.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+	v.str = mlx_get_data_addr(v.img_ptr, &v.bpp, &v.sl, &v.endian);
 	(a.tab && check > 0) ? sort(&a, &b, visu, &v) : write(2, "Error\n", 6);
 	mlx_loop(v.mlx_ptr);
 	free(a.tab);
