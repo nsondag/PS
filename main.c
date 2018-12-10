@@ -6,17 +6,16 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 08:43:20 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/09 18:20:16 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/10 13:30:16 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	sort(t_stack *a, t_stack *b, int visu)
+static int	sort(t_stack *a, t_stack *b, int visu, t_visu *v)
 {
 	
-	if (visu)
-		visualization(*a, *b);
+	visu ? visualization(*a, *b, v) : 0;
 	if (!(b->tab = (int*)malloc(sizeof(int) * a->len)))
 		return (0);
 	if (!ft_issorted(a, b->len) && a->len > 20)
@@ -44,13 +43,15 @@ int			main(int argc, char **argv)
 	t_stack	b;
 	int		check;
 	int		visu;
+	t_visu	v;
 
 	visu = 1; // to be done parsing for options
 	b.len = 0;
 	check = parser(&a, argv, argc);
 	if (!check)
 		return (0);
-	(a.tab && check > 0) ? sort(&a, &b, visu) : write(2, "Error\n", 6);
+	(a.tab && check > 0) ? sort(&a, &b, visu, &v) : write(2, "Error\n", 6);
+	mlx_loop(v.mlx_ptr);
 	free(a.tab);
 	free(b.tab);
 	return (0);

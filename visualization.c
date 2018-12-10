@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 18:15:59 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/09 19:23:55 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/10 13:30:14 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,11 @@ void	visu_tab(t_visu v, t_stack a)
 	}
 }
 
-void	visualization(t_stack a, t_stack b)
+void	visualization(t_stack a, t_stack b, t_visu *v)
 {
-	t_visu	v;
-
-	v.mlx_ptr = mlx_init();
-	v.win_ptr = mlx_new_window(v.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "PUSH_SWAP");
-	mlx_key_hook(v.win_ptr, key_hook, &v);
-	visu_tab(v, a);
-	visu_tab(v, b);
-	mlx_loop(v.mlx_ptr);
+	v->mlx_ptr = mlx_init();
+	v->win_ptr = mlx_new_window(v->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "PUSH_SWAP");
+	mlx_key_hook(v->win_ptr, key_hook, v);
+	visu_tab(*v, a);
+	visu_tab(*v, b);
 }
