@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 18:15:59 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/10 13:30:14 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/10 13:47:21 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,20 @@ void	visu_tab(t_visu v, t_stack a)
 	int k;
 	int l;
 	int color;
+	int value;
 
 	i = -1;
 	while (++i < a.len)
 	{
 		color = 0xFF3300;
 		j = -1;
-		if (a.tab[i] < 0)
+		value = a.tab[i];
+		if (value < 0)
 		{
-			a.tab[i] = -a.tab[i];
+			value = -value;
 			color = 0x33FF00;
 		}
-		while (++j < a.tab[i])
+		while (++j < value)
 		{
 			k = -1;
 			while (++k < 9)
@@ -56,8 +58,7 @@ void	visu_tab(t_visu v, t_stack a)
 
 void	visualization(t_stack a, t_stack b, t_visu *v)
 {
-	v->mlx_ptr = mlx_init();
-	v->win_ptr = mlx_new_window(v->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "PUSH_SWAP");
+	mlx_clear_window(v->mlx_ptr, v->win_ptr);
 	mlx_key_hook(v->win_ptr, key_hook, v);
 	visu_tab(*v, a);
 	visu_tab(*v, b);
