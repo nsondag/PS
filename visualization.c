@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 18:15:59 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/11 21:06:03 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/11 22:34:55 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int		key_hook(int keycode, t_visu *v)
 		mlx_destroy_window(v->mlx_ptr, v->win_ptr);
 		exit(0);
 	}
+	if (keycode == 49)
+		v->stop = -v->stop;
 	return (0);
 }
 
@@ -49,7 +51,7 @@ void	visu_tab(t_visu v, t_stack a, int shift)
 			while (++k < 5)
 			{
 				l = -1;
-				while (++l < 10)
+				while (++l < 9)
 					mlx_pixel_put(v.mlx_ptr, v.win_ptr,
 							5 * j + k + shift, i * 10 + l, color);
 			}

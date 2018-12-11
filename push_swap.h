@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 09:56:52 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/11 21:06:00 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/11 22:21:04 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct	s_visu
 	char		*str;
 	t_stack		a;
 	t_stack		b;
+	int			stop;
 }				t_visu;
 
 void			push_a(t_stack *a, t_stack *b, int write);
@@ -82,6 +83,7 @@ void			revsort3(t_stack *a);
 void			sort5(t_stack *a, t_stack *b);
 void			revsort5(t_stack *a, t_stack *b);
 
+int				key_hook(int keycode, t_visu *v);
 void			visualization(t_stack a, t_stack b, t_visu *v);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 08:43:20 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/11 21:23:54 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/11 22:22:30 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,20 @@ int		checker(t_stack *a, t_stack *b, t_visu *v)
 
 int				loop_hook(t_visu *v)
 {
-	//usleep(100000);
-	checker(&v->a, &v->b, v);
+	if (v->stop < 0)
+	{
+		usleep(500000);
+		checker(&v->a, &v->b, v);
+	}
 	return (0);
 }
 
 int				main(int argc, char **argv)
 {
-	//t_stack	a;
-	//t_stack	b;
 	int		check;
 	t_visu	v;
 
+	v.stop = -1;
 	v.b.len = 0;
 	check = parser(&v.a, argv, argc);
 	if (!check)
@@ -95,6 +97,7 @@ int				main(int argc, char **argv)
 		//free(a.tab);
 		//free(b.tab);
 		v.win_ptr = mlx_new_window(v.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "PUSH_SWAP");
+		mlx_key_hook(v.win_ptr, key_hook, &v);
 		mlx_loop_hook(v.mlx_ptr, loop_hook, &v);
 		mlx_loop(v.mlx_ptr);
 	}
