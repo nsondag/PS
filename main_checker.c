@@ -6,13 +6,13 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 08:43:20 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/11 18:50:52 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/11 19:16:46 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int		get_operation(t_stack *a, t_stack *b, char *operation)
+static int		get_operation(t_stack *a, t_stack *b, char *operation, t_visu *v)
 {
 	if (ft_strcmp(operation, "sa") == 0)
 		swap_a(a, 0);
@@ -38,16 +38,17 @@ static int		get_operation(t_stack *a, t_stack *b, char *operation)
 		revrot_ab(a, b, 0);
 	else
 		return (0);
+	visualization(*a, *b, v);
 	return (1);
 }
 
-static void		checker(t_stack *a, t_stack *b)
+static void		checker(t_stack *a, t_stack *b, t_visu *v)
 {
 	char *operation;
 
 	while (get_next_line(0, &operation) > 0)
 	{
-		if (!get_operation(a, b, operation))
+		if (!get_operation(a, b, operation, v))
 		{
 			write(2, "Error\n", 6);
 			return ;
@@ -82,9 +83,10 @@ int				main(int argc, char **argv)
 		v.img_ptr = mlx_new_image(v.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 		v.str = mlx_get_data_addr(v.img_ptr, &v.bpp, &v.sl, &v.endian);
 		visualization(a, b, &v);
-		checker(&a, &b);
+		checker(&a, &b, &v);
 		free(b.tab);
 		free(a.tab);
+		mlx_loop(v.mlx_ptr);
 	}
 	else
 		write(2, "Error\n", 6);
