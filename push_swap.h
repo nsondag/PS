@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 09:56:52 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/07 15:22:34 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/11 18:56:31 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,29 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "libft/libft.h"
+# include "mlx/mlx.h"
+
+# define WIN_HEIGHT 800
+# define WIN_WIDTH 1200
 
 typedef struct	s_stack
 {
 	int *tab;
 	int len;
 }				t_stack;
+
+typedef struct	s_visu
+{
+	int			bpp;
+	int			sl;
+	int			endian;
+
+	void		*mlx_ptr;
+	void		*win_ptr;
+	void		*img_ptr;
+	void		*data_ptr;
+	char		*str;
+}				t_visu;
 
 void			push_a(t_stack *a, t_stack *b, int write);
 void			push_b(t_stack *a, t_stack *b, int write);
@@ -61,5 +78,7 @@ void			sort3(t_stack *a);
 void			revsort3(t_stack *a);
 void			sort5(t_stack *a, t_stack *b);
 void			revsort5(t_stack *a, t_stack *b);
+
+void			visualization(t_stack a, t_stack b, t_visu *v);
 
 #endif
