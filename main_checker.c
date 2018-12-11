@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 08:43:20 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/11 19:16:46 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/11 20:58:10 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,50 +42,70 @@ static int		get_operation(t_stack *a, t_stack *b, char *operation, t_visu *v)
 	return (1);
 }
 
-static void		checker(t_stack *a, t_stack *b, t_visu *v)
+int		checker(t_stack *a, t_stack *b, t_visu *v)
 {
 	char *operation;
 
-	while (get_next_line(0, &operation) > 0)
+	if (get_next_line(0, &operation) > 0)
 	{
 		if (!get_operation(a, b, operation, v))
 		{
 			write(2, "Error\n", 6);
-			return ;
+			return (0);
 		}
 	}
-	if (ft_issorted(a, b->len))
+	else if (ft_issorted(a, b->len) )
 		write(1, "OK\n", 3);
 	else
 		write(1, "KO\n", 3);
+	return (0);
+}
+
+int				loop_hook(t_visu *v)
+{
+	/*static int i= 0; 
+	static int j= 0;
+
+	usleep(20);
+	i++;
+	j++;
+	mlx_pixel_put(v->mlx_ptr, v->win_ptr, i, i, 0xFFFFFF);
+	mlx_pixel_put(v->mlx_ptr, v->win_ptr, -j + WIN_HEIGHT, j, 0xFFFFFF);
+	return (0);*/
+	
+	//sleep(1);
+	checker(&v->a, &v->b, v);
+	return (0);
+
 }
 
 int				main(int argc, char **argv)
 {
-	t_stack	a;
-	t_stack	b;
+	//t_stack	a;
+	//t_stack	b;
 	int		check;
 	t_visu	v;
 
-	b.len = 0;
-	check = parser(&a, argv, argc);
+	v.b.len = 0;
+	check = parser(&v.a, argv, argc);
 	if (!check)
 		return (0);
-	if (a.tab && check > 0)
+	if (v.a.tab && check > 0)
 	{
-		if (!(b.tab = (int*)malloc(sizeof(int) * a.len)))
+		if (!(v.b.tab = (int*)malloc(sizeof(int) * v.a.len)))
 		{
-			free(a.tab);
+			free(v.a.tab);
 			return (0);
 		}
 		v.mlx_ptr = mlx_init();
-		v.win_ptr = mlx_new_window(v.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "PUSH_SWAP");
 		v.img_ptr = mlx_new_image(v.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 		v.str = mlx_get_data_addr(v.img_ptr, &v.bpp, &v.sl, &v.endian);
-		visualization(a, b, &v);
-		checker(&a, &b, &v);
-		free(b.tab);
-		free(a.tab);
+		//visualization(a, b, &v);
+		//checker(&a, &b, &v);
+		//free(a.tab);
+		//free(b.tab);
+		v.win_ptr = mlx_new_window(v.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "PUSH_SWAP");
+		mlx_loop_hook(v.mlx_ptr, loop_hook, &v);
 		mlx_loop(v.mlx_ptr);
 	}
 	else

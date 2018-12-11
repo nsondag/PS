@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 09:56:52 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/11 18:56:31 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/11 20:58:27 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 # define PUSH_SWAP_H
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
 # include "libft/libft.h"
 # include "mlx/mlx.h"
 
-# define WIN_HEIGHT 800
+# define WIN_HEIGHT 1200
 # define WIN_WIDTH 1200
 
 typedef struct	s_stack
@@ -37,6 +38,8 @@ typedef struct	s_visu
 	void		*img_ptr;
 	void		*data_ptr;
 	char		*str;
+	t_stack		a;
+	t_stack		b;
 }				t_visu;
 
 void			push_a(t_stack *a, t_stack *b, int write);
