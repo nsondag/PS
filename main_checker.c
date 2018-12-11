@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 08:43:20 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/11 20:58:10 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/11 21:23:54 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@ static int		get_operation(t_stack *a, t_stack *b, char *operation, t_visu *v)
 
 int		checker(t_stack *a, t_stack *b, t_visu *v)
 {
-	char *operation;
+	char	*operation;
+	int		line;
 
-	if (get_next_line(0, &operation) > 0)
+	if ((line = get_next_line(0, &operation)) > 0)
 	{
 		if (!get_operation(a, b, operation, v))
 		{
@@ -54,29 +55,18 @@ int		checker(t_stack *a, t_stack *b, t_visu *v)
 			return (0);
 		}
 	}
-	else if (ft_issorted(a, b->len) )
+	if (ft_issorted(a, b->len) && line <= 0)
 		write(1, "OK\n", 3);
-	else
+	else if (line <= 0)
 		write(1, "KO\n", 3);
 	return (0);
 }
 
 int				loop_hook(t_visu *v)
 {
-	/*static int i= 0; 
-	static int j= 0;
-
-	usleep(20);
-	i++;
-	j++;
-	mlx_pixel_put(v->mlx_ptr, v->win_ptr, i, i, 0xFFFFFF);
-	mlx_pixel_put(v->mlx_ptr, v->win_ptr, -j + WIN_HEIGHT, j, 0xFFFFFF);
-	return (0);*/
-	
-	//sleep(1);
+	//usleep(100000);
 	checker(&v->a, &v->b, v);
 	return (0);
-
 }
 
 int				main(int argc, char **argv)

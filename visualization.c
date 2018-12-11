@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 18:15:59 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/11 20:53:09 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/11 21:06:03 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ void	visu_tab(t_visu v, t_stack a, int shift)
 		while (++j < value)
 		{
 			k = -1;
-			while (++k < 9)
+			while (++k < 5)
 			{
 				l = -1;
-				while (++l < 9)
+				while (++l < 10)
 					mlx_pixel_put(v.mlx_ptr, v.win_ptr,
-							10 * j + k + shift, i * 10 + l, color);
+							5 * j + k + shift, i * 10 + l, color);
 			}
 		}
 	}

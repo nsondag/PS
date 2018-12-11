@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 09:56:52 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/11 20:58:27 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/11 21:06:00 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "libft/libft.h"
 # include "mlx/mlx.h"
 
-# define WIN_HEIGHT 1200
+# define WIN_HEIGHT 1005
 # define WIN_WIDTH 1200
 
 typedef struct	s_stack
