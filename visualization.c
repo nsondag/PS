@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 18:15:59 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/12 15:03:48 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/12 20:36:38 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int		key_hook(int keycode, t_visu *v)
 	}
 	if (keycode == 49)
 		v->stop = -v->stop;
+	if (keycode == 1)
+		v->slow = -v->slow;
 	return (0);
 }
 
@@ -40,6 +42,8 @@ void	visu_tab(t_visu v, t_stack a, int shift)
 		color = 0xFF3300;
 		j = -1;
 		value = a.tab[i];
+		if (value == 76)
+			color = 0xFFFFFF;
 		if (value < 0)
 		{
 			value = -value;

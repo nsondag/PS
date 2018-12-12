@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 08:43:20 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/12 16:02:02 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/12 20:27:47 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ int				loop_hook(t_visu *v)
 {
 	if (v->stop < 0)
 	{
-	//	usleep(500000);
+		if (v->slow == 1)
+			sleep(1);
 		checker(&v->a, &v->b, v);
 	}
 	return (0);
@@ -87,6 +88,7 @@ int				main(int argc, char **argv)
 	t_visu	v;
 
 	v.stop = -1;
+	v.slow = -1;
 	v.b.len = 0;
 	check = parser(&v.a, argv, argc);
 	if (!check)
