@@ -6,7 +6,7 @@
 #    By: nsondag <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/14 21:09:08 by nsondag           #+#    #+#              #
-#    Updated: 2018/12/02 23:12:01 by nsondag          ###   ########.fr        #
+#    Updated: 2018/12/12 15:01:38 by nsondag          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRC = ft_memset.c\
 	  ft_strncpy.c\
 	  ft_strcat.c\
 	  ft_strsub.c\
+	  ft_itoa.c\
 
 NAME = libft.a
 

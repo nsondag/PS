@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 08:43:20 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/11 22:22:30 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/12 15:06:41 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,9 @@ static int		get_operation(t_stack *a, t_stack *b, char *operation, t_visu *v)
 
 int		checker(t_stack *a, t_stack *b, t_visu *v)
 {
-	char	*operation;
-	int		line;
+	char		*operation;
+	int			line;
+	static int	count = 0;
 
 	if ((line = get_next_line(0, &operation)) > 0)
 	{
@@ -54,19 +55,21 @@ int		checker(t_stack *a, t_stack *b, t_visu *v)
 			write(2, "Error\n", 6);
 			return (0);
 		}
+		count++;
+		mlx_string_put(v->mlx_ptr, v->win_ptr, 1000, 50, 0xFFFFFF, ft_itoa(count));
 	}
 	if (ft_issorted(a, b->len) && line <= 0)
 		write(1, "OK\n", 3);
 	else if (line <= 0)
 		write(1, "KO\n", 3);
-	return (0);
+	return (count);
 }
 
 int				loop_hook(t_visu *v)
 {
 	if (v->stop < 0)
 	{
-		usleep(500000);
+	//	usleep(500000);
 		checker(&v->a, &v->b, v);
 	}
 	return (0);
