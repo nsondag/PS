@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 23:19:58 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/07 15:22:14 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/12 22:39:06 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	quick_sort(t_stack *a, t_stack *b)
 		divide2(a, b, len, pivot);
 	}
 	sort5(a, b);
-	while (b->len > 3)
+	/*while (b->len > 3)
 	{
 		len = b->len;
 		pivot = get_median(*b);
@@ -61,7 +61,7 @@ void	quick_sort(t_stack *a, t_stack *b)
 	}
 	revsort3(b);
 	while (b->len)
-		push_a(a, b, 1);
+		push_a(a, b, 1);*/
 }
 
 void	core(t_stack *a, t_stack *b, int len, int *first)
@@ -98,7 +98,7 @@ void	quick_sort2(t_stack *a, t_stack *b)
 	first = 0;
 	len = next_pivot(a);
 	if (!len)
-		rot_a(a, 1);
+	;	//rot_a(a, 1);
 	else if (a->tab[0] > a->tab[1])
 		swap_a(a, 1);
 	else
