@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 08:43:20 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/12 15:06:41 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/12 16:02:02 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,15 @@ int		checker(t_stack *a, t_stack *b, t_visu *v)
 		mlx_string_put(v->mlx_ptr, v->win_ptr, 1000, 50, 0xFFFFFF, ft_itoa(count));
 	}
 	if (ft_issorted(a, b->len) && line <= 0)
+	{
+		v->stop = 0;
 		write(1, "OK\n", 3);
+	}
 	else if (line <= 0)
+	{
+		v->stop = 0;
 		write(1, "KO\n", 3);
+	}
 	return (count);
 }
 
