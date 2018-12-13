@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 08:43:20 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/12 20:27:47 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/13 14:41:11 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int		get_operation(t_stack *a, t_stack *b, char *operation, t_visu *v)
 		revrot_ab(a, b, 0);
 	else
 		return (0);
-	visualization(*a, *b, v);
+	v->on ? visualization(*a, *b, v) : 0;
 	return (1);
 }
 
@@ -48,15 +48,30 @@ int		checker(t_stack *a, t_stack *b, t_visu *v)
 	int			line;
 	static int	count = 0;
 
-	if ((line = get_next_line(0, &operation)) > 0)
+	if (v->on)
 	{
-		if (!get_operation(a, b, operation, v))
+		if ((line = get_next_line(0, &operation)) > 0)
 		{
-			write(2, "Error\n", 6);
-			return (0);
+			if (!get_operation(a, b, operation, v))
+			{
+				write(2, "Error\n", 6);
+				return (0);
+			}
+			count++;
+			mlx_string_put(v->mlx_ptr, v->win_ptr, 1000, 50, 0xFFFFFF,
+					ft_itoa(count));
 		}
-		count++;
-		mlx_string_put(v->mlx_ptr, v->win_ptr, 1000, 50, 0xFFFFFF, ft_itoa(count));
+	}
+	else
+	{
+		while ((line = get_next_line(0, &operation)) > 0)
+		{
+			if (!get_operation(a, b, operation, v))
+			{
+				write(2, "Error\n", 6);
+				return (0);
+			}
+		}
 	}
 	if (ft_issorted(a, b->len) && line <= 0)
 	{
@@ -87,9 +102,11 @@ int				main(int argc, char **argv)
 	int		check;
 	t_visu	v;
 
+
 	v.stop = -1;
 	v.slow = -1;
 	v.b.len = 0;
+	v.on = 0;
 	check = parser(&v.a, argv, argc);
 	if (!check)
 		return (0);
@@ -100,17 +117,19 @@ int				main(int argc, char **argv)
 			free(v.a.tab);
 			return (0);
 		}
-		v.mlx_ptr = mlx_init();
-		v.img_ptr = mlx_new_image(v.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
-		v.str = mlx_get_data_addr(v.img_ptr, &v.bpp, &v.sl, &v.endian);
-		//visualization(a, b, &v);
-		//checker(&a, &b, &v);
-		//free(a.tab);
-		//free(b.tab);
-		v.win_ptr = mlx_new_window(v.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "PUSH_SWAP");
-		mlx_key_hook(v.win_ptr, key_hook, &v);
-		mlx_loop_hook(v.mlx_ptr, loop_hook, &v);
-		mlx_loop(v.mlx_ptr);
+		if (v.on)
+		{
+			v.mlx_ptr = mlx_init();
+			v.img_ptr = mlx_new_image(v.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+			v.str = mlx_get_data_addr(v.img_ptr, &v.bpp, &v.sl, &v.endian);
+			v.win_ptr = mlx_new_window(v.mlx_ptr, WIN_WIDTH, WIN_HEIGHT,
+					"PUSH_SWAP");
+			mlx_key_hook(v.win_ptr, key_hook, &v);
+			mlx_loop_hook(v.mlx_ptr, loop_hook, &v);
+			mlx_loop(v.mlx_ptr);
+		}
+		else
+			checker(&v.a, &v.b, &v);
 	}
 	else
 		write(2, "Error\n", 6);
