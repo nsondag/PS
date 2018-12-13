@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 09:56:52 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/13 14:29:02 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/13 15:03:22 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 
 # define WIN_HEIGHT 1005
 # define WIN_WIDTH 1200
+
+typedef	union	u_color
+{
+	int				i;
+	unsigned char	tab[4];
+}				t_color;
 
 typedef struct	s_stack
 {

@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 08:43:20 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/13 14:41:11 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/13 15:37:45 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ int		checker(t_stack *a, t_stack *b, t_visu *v)
 				return (0);
 			}
 			count++;
-			mlx_string_put(v->mlx_ptr, v->win_ptr, 1000, 50, 0xFFFFFF,
-					ft_itoa(count));
 		}
 	}
 	else
@@ -88,11 +86,19 @@ int		checker(t_stack *a, t_stack *b, t_visu *v)
 
 int				loop_hook(t_visu *v)
 {
+	int	count;
+
 	if (v->stop < 0)
 	{
 		if (v->slow == 1)
 			sleep(1);
-		checker(&v->a, &v->b, v);
+		v->img_ptr = mlx_new_image(v->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+		v->str = mlx_get_data_addr(v->img_ptr, &v->bpp, &v->sl, &v->endian);
+		if (ft_issorted(&v->a, v->b.len))
+			return (0);
+		count = checker(&v->a, &v->b, v);
+		mlx_put_image_to_window(v->mlx_ptr, v->win_ptr, v->img_ptr, 0, 0);
+		mlx_string_put(v->mlx_ptr, v->win_ptr, 1000, 50, 0xFFFFFF, ft_itoa(count));
 	}
 	return (0);
 }
@@ -106,7 +112,7 @@ int				main(int argc, char **argv)
 	v.stop = -1;
 	v.slow = -1;
 	v.b.len = 0;
-	v.on = 0;
+	v.on = 1;
 	check = parser(&v.a, argv, argc);
 	if (!check)
 		return (0);
@@ -120,8 +126,6 @@ int				main(int argc, char **argv)
 		if (v.on)
 		{
 			v.mlx_ptr = mlx_init();
-			v.img_ptr = mlx_new_image(v.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
-			v.str = mlx_get_data_addr(v.img_ptr, &v.bpp, &v.sl, &v.endian);
 			v.win_ptr = mlx_new_window(v.mlx_ptr, WIN_WIDTH, WIN_HEIGHT,
 					"PUSH_SWAP");
 			mlx_key_hook(v.win_ptr, key_hook, &v);
