@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 08:43:20 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/15 16:43:36 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/15 19:51:20 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int				main(int argc, char **argv)
 	v.stop = -1;
 	v.slow = -1;
 	v.b.len = 0;
-	v.on = 1;
+	v.on = 0;
 	check = parser(&v.a, argv, argc);
 	if (!check)
 		return (0);

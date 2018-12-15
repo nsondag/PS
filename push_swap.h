@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 09:56:52 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/13 15:03:22 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/15 19:44:36 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void			quick_sort2(t_stack *a, t_stack *b);
 void			sort3(t_stack *a);
 void			revsort3(t_stack *a);
 void			sort5(t_stack *a, t_stack *b);
-void			revsort5(t_stack *a, t_stack *b);
+void			revsort5(t_stack *a, t_stack *b, int test);
 
 int				key_hook(int keycode, t_visu *v);
 void			visualization(t_stack a, t_stack b, t_visu *v);

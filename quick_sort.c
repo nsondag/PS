@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 23:19:58 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/12 22:46:43 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/15 19:46:29 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,75 +43,40 @@ int		next_pivot(t_stack *stack)
 
 void	quick_sort(t_stack *a, t_stack *b)
 {
-	int pivot;
+	int median;
 	int len;
 
 	while (a->len > 25)
 	{
-		pivot = get_median(*a);
+		median = get_median(*a);
 		len = a->len;
-		divide2(a, b, len, pivot);
+		divide2(a, b, len, median);
 	}
 	sort5(a, b);
-	/*while (b->len > 3)
-	{
-		len = b->len;
-		pivot = get_median(*b);
-		divide(a, b, len, pivot);
-	}
-	revsort3(b);
-	while (b->len)
-		push_a(a, b, 1);*/
-}
-
-void	core(t_stack *a, t_stack *b, int len, int *first)
-{
-	int pivot;
-
-	len = b->len;
-	pivot = get_median(*b);
-	while (len)
-	{
-		if (b->tab[0] < pivot && *first)
-		{
-			rot_ab(a, b, 1);
-			*first = 0;
-		}
-		else if (b->tab[0] < pivot)
-			rot_b(b, 1);
-		else
-		{
-			if (*first)
-				rot_a(a, 1);
-			push_a(a, b, 1);
-			*first = 0;
-		}
-		len--;
-	}
 }
 
 void	quick_sort2(t_stack *a, t_stack *b)
 {
+	int sorted;
 	int len;
-	int first;
+	int median;
 
-	first = 0;
-	len = next_pivot(a);
-	if (!len)
-	;	//rot_a(a, 1);
-	else if (a->tab[0] > a->tab[1])
-		swap_a(a, 1);
-	else
+	revsort5(a, b, 50);
+	sorted = a->len - 1;
+	len = b->len;
+	median = get_median(*b);
+	while (b->len > len / 2 + 1)
 	{
-		while (len--)
-			push_b(a, b, 1);
-		first = 1;
-		if (b->len <= 25)
-			rot_a(a, 1);
-		while (b->len > 25)
-			core(a, b, len, &first);
+		if (b->tab[0] > median)
+			push_a(a, b, 1);
+		else
+			rot_b(b, 1);
 	}
-	revsort5(a, b);
+	while (a->len > sorted)
+		push_b(a, b, 1);
+	revsort5(a, b, 2);
+	//median = get_median(*b);
+	//len = b->len;
 	while (b->len)
 		push_a(a, b, 1);
 }

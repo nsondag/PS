@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 17:21:14 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/12 22:36:54 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/15 19:44:20 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,14 @@ void	sort5(t_stack *a, t_stack *b)
 		push_a(a, b, 1);
 }
 
-void	revsort5(t_stack *a, t_stack *b)
+void	revsort5(t_stack *a, t_stack *b, int test)
 {
 	int i_max;
 	int i_max2;
 	int max;
 	int max2;
 
-	while (!ft_isrevsorted(b, 0) && b->len > 2)
+	while (!ft_isrevsorted(b, 0) && b->len > test)
 	{
 		i_max = 0;
 		i_max2 = 0;
