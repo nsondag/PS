@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 08:43:20 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/13 16:23:08 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/15 16:43:36 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int				loop_hook(t_visu *v)
 		v->str = mlx_get_data_addr(v->img_ptr, &v->bpp, &v->sl, &v->endian);
 		count = checker(&v->a, &v->b, v);
 		if (ft_issorted(&v->a, v->b.len))
-			return (0);
+			v->stop = 0;
 		mlx_put_image_to_window(v->mlx_ptr, v->win_ptr, v->img_ptr, 0, 0);
 		mlx_string_put(v->mlx_ptr, v->win_ptr, 1000, 50, 0xFFFFFF, ft_itoa(count));
 	}
