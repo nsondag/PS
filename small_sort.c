@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 17:21:14 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/15 19:44:20 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/16 03:01:53 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	sort5(t_stack *a, t_stack *b)
 	int count;
 
 	count = 0;
-	while (!ft_issorted(a, b->len) && a->len > 2)
+	while (!ft_issorted(a, 0) && a->len > 2)
 	{
 		i = 0;
 		min = get_min(*a);
