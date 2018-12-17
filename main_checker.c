@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 08:43:20 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/16 03:01:51 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/17 15:21:42 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int				loop_hook(t_visu *v)
 		if (ft_issorted(&v->a, v->b.len))
 			v->stop = 0;
 		mlx_put_image_to_window(v->mlx_ptr, v->win_ptr, v->img_ptr, 0, 0);
+		mlx_destroy_image(v->mlx_ptr, v->img_ptr);
 		mlx_string_put(v->mlx_ptr, v->win_ptr, 1000, 50, 0xFFFFFF, ft_itoa(count));
 	}
 	return (0);
@@ -112,12 +113,13 @@ int				main(int argc, char **argv)
 	v.stop = -1;
 	v.slow = -1;
 	v.b.len = 0;
-	v.on = 0;
+	v.on = 1;
 	check = parser(&v.a, argv, argc);
 	if (!check)
 		return (0);
 	if (v.a.tab && check > 0)
 	{
+		v.size = v.a.len;
 		if (!(v.b.tab = (int*)malloc(sizeof(int) * v.a.len)))
 		{
 			free(v.a.tab);

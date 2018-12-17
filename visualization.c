@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 18:15:59 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/13 15:36:50 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/17 15:20:15 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		key_hook(int keycode, t_visu *v)
 	return (0);
 }
 
-void	visu_tab(t_visu v, t_stack a, int shift)
+void	visu_tab(t_visu v, t_stack a, int shift, int size)
 {
 	int		i;
 	int		j;
@@ -56,8 +56,6 @@ void	visu_tab(t_visu v, t_stack a, int shift)
 		color.i = 0xFF3300;
 		j = -1;
 		value = a.tab[i];
-		//if (value == 76)
-		//	color.i = 0xFFFFFF;
 		if (value < 0)
 		{
 			value = -value;
@@ -66,11 +64,11 @@ void	visu_tab(t_visu v, t_stack a, int shift)
 		while (++j < value)
 		{
 			k = -1;
-			while (++k < 5)
+			while (++k < size / 2)
 			{
 				l = -1;
-				while (++l < 9)
-					fill_pixel(&v, 5 * j + k + shift, i * 10 + l, color);
+				while (++l < size - 1)
+					fill_pixel(&v, size / 2 * j + k + shift, i * size + l, color);
 			}
 		}
 	}
@@ -78,7 +76,13 @@ void	visu_tab(t_visu v, t_stack a, int shift)
 
 void	visualization(t_stack a, t_stack b, t_visu *v)
 {
+	int size;
+
+	if (v->size < 101)
+		size = 10;
+	else
+		size = 2;
 	mlx_key_hook(v->win_ptr, key_hook, v);
-	visu_tab(*v, a, 0);
-	visu_tab(*v, b, WIN_WIDTH/2);
+	visu_tab(*v, a, 0, size);
+	visu_tab(*v, b, WIN_WIDTH/2, size);
 }

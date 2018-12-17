@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 09:56:52 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/15 19:44:36 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/17 14:49:56 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct	s_visu
 	int			stop;
 	int			slow;
 	int			on;
+	int			size;
 }				t_visu;
 
 void			push_a(t_stack *a, t_stack *b, int write);
