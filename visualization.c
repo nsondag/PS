@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 18:15:59 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/17 15:20:15 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/18 23:07:16 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	visu_tab(t_visu v, t_stack a, int shift, int size)
 			value = -value;
 			color.i = 0x33FF00;
 		}
+		if (value == 50 || value == 75 || value == 88)
+			color.i = 0x33FF00;
 		while (++j < value)
 		{
 			k = -1;
