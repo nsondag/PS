@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 08:43:20 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/17 15:21:42 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/18 15:11:45 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,14 @@ int				loop_hook(t_visu *v)
 			sleep(1);
 		v->img_ptr = mlx_new_image(v->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 		v->str = mlx_get_data_addr(v->img_ptr, &v->bpp, &v->sl, &v->endian);
-		count = checker(&v->a, &v->b, v);
+		if (v->stop == -2)
+		{
+			v->stop = 1;
+			visualization(v->a, v->b, v);
+			count = 0;
+		}
+		else
+			count = checker(&v->a, &v->b, v);
 		if (ft_issorted(&v->a, v->b.len))
 			v->stop = 0;
 		mlx_put_image_to_window(v->mlx_ptr, v->win_ptr, v->img_ptr, 0, 0);
@@ -110,7 +117,7 @@ int				main(int argc, char **argv)
 	t_visu	v;
 
 
-	v.stop = -1;
+	v.stop = -2;
 	v.slow = -1;
 	v.b.len = 0;
 	v.on = 1;
