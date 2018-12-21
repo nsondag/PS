@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 09:56:52 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/07 15:22:34 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/21 09:56:47 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
 # include "libft/libft.h"
 
 typedef struct	s_stack
@@ -49,7 +50,7 @@ int				check_validity2(char *s);
 void			left_shift(t_stack *stack);
 void			right_shift(t_stack *stack);
 
-int				ft_issorted(t_stack *a, int len_b);
+int				ft_issorted(t_stack *a, int len, int len_b);
 int				ft_isrevsorted(t_stack *a, int len_b);
 
 void			divide(t_stack *a, t_stack *b, int len, int pivot);
@@ -58,6 +59,7 @@ void			divide2(t_stack *a, t_stack *b, int len, int pivot);
 void			quick_sort(t_stack *a, t_stack *b);
 void			quick_sort2(t_stack *a, t_stack *b);
 void			sort3(t_stack *a);
+void			qsort3(t_stack *a);
 void			revsort3(t_stack *a);
 void			sort5(t_stack *a, t_stack *b);
 void			revsort5(t_stack *a, t_stack *b);

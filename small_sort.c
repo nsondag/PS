@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 17:21:14 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/21 08:02:18 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/21 11:17:22 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	sort3(t_stack *stack)
 	else if (stack->len == 3)
 	{
 		max = get_max(*stack);
-		while (!ft_issorted(stack, 0))
+		while (!ft_issorted(stack, 0, 0))
 		{
 			if (stack->tab[0] == max)
 				rot_a(stack, 1);
@@ -53,6 +53,47 @@ void	sort3(t_stack *stack)
 				revrot_a(stack, 1);
 			else
 				swap_a(stack, 1);
+		}
+	}
+}
+
+void	qsort3(t_stack *stack)
+{
+	int		max;
+	int		count;
+	int		ret;
+	int		swap;
+
+	count = 0;
+	ret = 0;
+	swap = 0;
+	if (stack->tab[0] > stack->tab[1] && stack->tab[0] > stack->tab[2])
+		max = stack->tab[0];
+	else if (stack->tab[1] > stack->tab[0] && stack->tab[1] > stack->tab[2])
+		max = stack->tab[1];
+	else 
+		max = stack->tab[2];
+	while (!ft_issorted(stack, 3, 0) || stack->tab[2] != max)
+	{
+		if (count % 2 == 1 || swap ||
+				(stack->tab[2] == max && stack->tab[0] > stack->tab[1]))
+		{
+			swap_a(stack, 1);
+			count++;
+			swap = 0;
+		}
+		else if ((stack->tab[1] == max && !count) ^ (count == 2) && !ret)
+		{
+			rot_a(stack, 1);
+			count++;
+			ret++;
+			swap = 1;
+		}
+		else if (ret)
+		{
+			swap = 1;
+			revrot_a(stack, 1);
+			ret--;
 		}
 	}
 }
@@ -65,7 +106,7 @@ void	sort5(t_stack *a, t_stack *b)
 	int count;
 
 	count = 0;
-	while (!ft_issorted(a, b->len) && a->len > 2)
+	while (!ft_issorted(a, 0, b->len) && a->len > 2)
 	{
 		i = 0;
 		min = get_min(*a);
@@ -76,7 +117,7 @@ void	sort5(t_stack *a, t_stack *b)
 			rot_a(a, 1);
 		while (i_min > a->len / 2 && a->tab[0] != min)
 			revrot_a(a, 1);
-		if (ft_issorted(a, b->len))
+		if (ft_issorted(a, 0, b->len))
 			break ;
 		push_b(a, b, 1);
 		count++;

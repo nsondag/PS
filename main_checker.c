@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 08:43:20 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/02 21:53:27 by nsondag          ###   ########.fr       */
+/*   Updated: 2018/12/21 09:28:44 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void		checker(t_stack *a, t_stack *b)
 			return ;
 		}
 	}
-	if (ft_issorted(a, b->len))
+	if (ft_issorted(a, 0, b->len))
 		write(1, "OK\n", 3);
 	else
 		write(1, "KO\n", 3);
