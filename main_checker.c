@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 08:43:20 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/18 15:11:45 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/02 11:42:16 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ int				loop_hook(t_visu *v)
 	{
 		if (v->slow == 1)
 			sleep(1);
+		else
+			usleep(50000);
 		v->img_ptr = mlx_new_image(v->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 		v->str = mlx_get_data_addr(v->img_ptr, &v->bpp, &v->sl, &v->endian);
 		if (v->stop == -2)
