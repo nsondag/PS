@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 23:19:58 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/03 17:49:35 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/03 21:06:57 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		next_pivot(t_stack *stack)
 		}
 		pivot++;
 	}
-	return (stack->tab[pivot]);
+	return (pivot);
 }
 
 void	quick_sort(t_stack *a, t_stack *b, int end)
@@ -47,7 +47,7 @@ void	quick_sort(t_stack *a, t_stack *b, int end)
 	int len;
 	int	max;
 
-	if (end == -1) 
+	if (end == -1)
 		len = a->len;
 	else
 		len = end;
@@ -94,6 +94,7 @@ void	quick_sort2(t_stack *a, t_stack *b, int end)
 	int max;
 	int i;
 	int pivot;
+	int	i_pivot;
 
 	i = 0;
 	(a->tab[0] > a->tab[1] && ft_issorted(a, 0, 1)) ? swap_a(a, 1) : 0;
@@ -105,11 +106,12 @@ void	quick_sort2(t_stack *a, t_stack *b, int end)
 	if (ft_issorted(a, 0, 0) && b->len > 0)
 	{
 		max = get_max(*b);
-		pivot = next_pivot(b);
+		i_pivot = next_pivot(b);
+		pivot = b->tab[i_pivot];
 		if (pivot == b->tab[b->len - 1] && b->len > 1)
 			quick_sort_b(a, b, b->len);
 		else
-		{	
+		{
 			while (b->tab[0] != pivot && b->len > 0)
 				push_a(a, b, 1);
 			push_a(a, b, 1);
@@ -120,6 +122,8 @@ void	quick_sort2(t_stack *a, t_stack *b, int end)
 		end = 0;
 		while (!ft_issorted(a, 0, end))
 			end++;
+		if (end < 25)
+			sort5(a, b);
 		if (!ft_issorted(a, 0, 0))
 			quick_sort(a, b, end + 1);
 	}

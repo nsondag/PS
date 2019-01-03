@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 17:21:14 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/02 22:30:14 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/03 21:03:06 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	revsort3(t_stack *stack)
 	if (stack->len == 3)
 	{
 		min = get_min(*stack);
-		while (!ft_isrevsorted(stack, 0))
+		while (!ft_isrevsorted(stack, 0, stack->len))
 		{
 			if (stack->tab[0] == min)
 				rot_b(stack, 1);
@@ -88,28 +88,22 @@ void	sort5(t_stack *a, t_stack *b)
 
 void	revsort5(t_stack *a, t_stack *b, int test)
 {
-	int i_max;
-	int i_max2;
 	int max;
-	int max2;
+	int i_max;
 
-	while (!ft_isrevsorted(b, 0) && b->len > test)
+	i_max = 0;
+	if (b->len < test)
+		test = b->len;
+	while (!ft_isrevsorted(b, 0, test))
 	{
-		i_max = 0;
-		i_max2 = 0;
-		get_max2(*b, &max, &max2);
+		max = get_max(*b);
 		while (b->tab[i_max] != max)
 			i_max++;
-		while (b->tab[i_max2] != max2)
-			i_max2++;
-		if (i_max <= b->len / 2)
-			while (b->tab[0] != max && b->tab[0] != max2)
-				rot_b(b, 1);
-		else if (i_max > b->len / 2)
-			while (b->tab[0] != max && b->tab[0] != max2)
-				revrot_b(b, 1);
-		(b->tab[0] == max || b->tab[0] == max2) ? push_a(a, b, 1) : 0;
+		while (b->tab[0] != max && i_max < b->len / 2)
+			rot_b(b, 1);
+		push_a(a, b, 1);
+		while (b->tab[0] != max && i_max >= b->len / 2)
+			revrot_b(b, 1);
+		push_a(a, b, 1);
 	}
-	(a->tab[0] > a->tab[1] && a->tab[1] != get_min(*a)) ? swap_a(a, 1) : 0;
-	(b->tab[0] < b->tab[1]) ? swap_b(b, 1) : 0;
 }

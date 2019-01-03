@@ -6,13 +6,13 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 08:43:20 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/03 17:39:00 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/03 21:06:59 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int		get_operation(t_stack *a, t_stack *b, char *operation, t_visu *v)
+static int	get_operation(t_stack *a, t_stack *b, char *operation, t_visu *v)
 {
 	if (ft_strcmp(operation, "sa") == 0)
 		swap_a(a, 0);
@@ -42,7 +42,7 @@ static int		get_operation(t_stack *a, t_stack *b, char *operation, t_visu *v)
 	return (1);
 }
 
-int		checker(t_stack *a, t_stack *b, t_visu *v)
+int			checker(t_stack *a, t_stack *b, t_visu *v)
 {
 	char		*operation;
 	int			line;
@@ -92,8 +92,8 @@ int				loop_hook(t_visu *v)
 	{
 		if (v->slow == 1)
 			sleep(1);
-		else
-			usleep(50000);
+		//else 
+		//	usleep(50000);
 		v->img_ptr = mlx_new_image(v->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 		v->str = mlx_get_data_addr(v->img_ptr, &v->bpp, &v->sl, &v->endian);
 		if (v->stop == -2)
@@ -117,7 +117,6 @@ int				main(int argc, char **argv)
 {
 	int		check;
 	t_visu	v;
-
 
 	v.stop = -2;
 	v.slow = -1;

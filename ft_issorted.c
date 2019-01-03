@@ -6,21 +6,21 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/28 05:48:32 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/02 19:38:54 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/03 20:58:25 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		ft_isrevsorted(t_stack *a, int len_b)
+int		ft_isrevsorted(t_stack *a, int len_b, int end)
 {
 	int i;
 
 	i = 0;
 	if (len_b)
 		return (0);
-	while (i < a->len - 1)
-	{
+	while (i < end - 1)
+	{	
 		if (a->tab[i] < a->tab[i + 1])
 			return (0);
 		i++;

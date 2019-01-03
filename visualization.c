@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 18:15:59 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/03 12:16:53 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/03 18:09:03 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	visu_tab(t_visu v, t_stack a, int shift, int size)
 	t_color	color;
 	int		value;
 
-
 	i = -1;
 	while (++i < a.len)
 	{
@@ -61,13 +60,6 @@ void	visu_tab(t_visu v, t_stack a, int shift, int size)
 			value = -value;
 			color.i = 0x33FF00;
 		}
-		if (value == 50 || value == 75 || value == 88)
-			color.i = 0x33FF00;
-		if (value > 94)
-			color.i = 0xFFFFFF;
-		if (value == 94)
-			color.i = 0x666666;
-
 		while (++j < value)
 		{
 			k = -1;
@@ -75,7 +67,8 @@ void	visu_tab(t_visu v, t_stack a, int shift, int size)
 			{
 				l = -1;
 				while (++l < size - 1)
-					fill_pixel(&v, size / 2 * j + k + shift, i * size + l, color);
+					fill_pixel(&v, size / 2 * j + k + shift,
+							i * size + l, color);
 			}
 		}
 	}
@@ -91,5 +84,5 @@ void	visualization(t_stack a, t_stack b, t_visu *v)
 		size = 2;
 	mlx_key_hook(v->win_ptr, key_hook, v);
 	visu_tab(*v, a, 0, size);
-	visu_tab(*v, b, WIN_WIDTH/2, size);
+	visu_tab(*v, b, WIN_WIDTH / 2, size);
 }

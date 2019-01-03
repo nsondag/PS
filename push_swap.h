@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 09:56:52 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/02 21:21:20 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/03 20:13:41 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ int				check_validity2(char *s);
 void			left_shift(t_stack *stack);
 void			right_shift(t_stack *stack);
 
-int				ft_issorted(t_stack *a, int len_b, int end);
-int				ft_isrevsorted(t_stack *a, int len_b);
+int				ft_issorted(t_stack *a, int len_b, int begin);
+int				ft_isrevsorted(t_stack *a, int len_b, int end);
 
 void			divide(t_stack *a, t_stack *b, int len, int pivot);
 void			divide2(t_stack *a, t_stack *b, int len, int pivot);
