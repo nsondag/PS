@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 23:19:58 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/03 16:22:18 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/03 17:49:35 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,27 @@ void	quick_sort(t_stack *a, t_stack *b, int end)
 		revrot_b(b, 1);
 }
 
+void	quick_sort_b(t_stack *a, t_stack *b, int end)
+{
+	int median;
+	int len;
+
+	len = end;
+	len = b->len;
+	median = get_median(*b, len);
+	while (len)
+	{
+		if (b->tab[0] >= median)
+			push_a(a, b, 1);
+		else
+			rot_b(b, 1);
+		a->tab[0] == median ? rot_a(a, 1) : 0;
+		len--;
+	}
+	if (a->len && a->tab[a->len - 1] == median)
+		revrot_a(a, 1);
+}
+
 void	quick_sort2(t_stack *a, t_stack *b, int end)
 {
 	int max;
@@ -85,9 +106,14 @@ void	quick_sort2(t_stack *a, t_stack *b, int end)
 	{
 		max = get_max(*b);
 		pivot = next_pivot(b);
-		while (b->tab[0] != pivot && b->len > 0)
+		if (pivot == b->tab[b->len - 1] && b->len > 1)
+			quick_sort_b(a, b, b->len);
+		else
+		{	
+			while (b->tab[0] != pivot && b->len > 0)
+				push_a(a, b, 1);
 			push_a(a, b, 1);
-		push_a(a, b, 1);
+		}
 	}
 	else
 	{
