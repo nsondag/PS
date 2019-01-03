@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 08:43:20 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/15 19:47:11 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/03 12:54:07 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,21 @@ static int	sort(t_stack *a, t_stack *b)
 {
 	if (!(b->tab = (int*)malloc(sizeof(int) * a->len)))
 		return (0);
-	if (!ft_issorted(a, b->len) && a->len > 20)
+	if (!ft_issorted(a, b->len, 0) && a->len > 20)
 	{
-		quick_sort(a, b);
-		while (!ft_issorted(a, b->len))
-			quick_sort2(a, b);
+		while (a->len > 2 && !ft_issorted(a, 0, 0))
+			quick_sort(a, b, a->len);
+		while (!ft_issorted(a, b->len, 0))
+			quick_sort2(a, b, a->len);
 	}
 	else if (a->len > 3)
 	{
-		while (!ft_issorted(a, b->len))
+		while (!ft_issorted(a, b->len, 0))
 			sort5(a, b);
 	}
 	else if (a->len > 1)
 	{
-		while (!ft_issorted(a, b->len))
+		while (!ft_issorted(a, b->len, 0))
 			sort3(a);
 	}
 	return (0);

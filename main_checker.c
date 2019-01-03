@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 08:43:20 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/02 11:42:16 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/03 12:54:02 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		checker(t_stack *a, t_stack *b, t_visu *v)
 			}
 		}
 	}
-	if (ft_issorted(a, b->len) && line <= 0)
+	if (ft_issorted(a, b->len, 0) && line <= 0)
 	{
 		v->stop = 0;
 		write(1, "OK\n", 3);
@@ -104,7 +104,7 @@ int				loop_hook(t_visu *v)
 		}
 		else
 			count = checker(&v->a, &v->b, v);
-		if (ft_issorted(&v->a, v->b.len))
+		if (ft_issorted(&v->a, v->b.len, 0))
 			v->stop = 0;
 		mlx_put_image_to_window(v->mlx_ptr, v->win_ptr, v->img_ptr, 0, 0);
 		mlx_destroy_image(v->mlx_ptr, v->img_ptr);

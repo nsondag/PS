@@ -6,13 +6,13 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 15:26:30 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/02 11:43:01 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/02 17:04:14 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	get_median(t_stack stack)
+int	get_median(t_stack stack, int len)
 {
 	int i;
 	int j;
@@ -21,12 +21,12 @@ int	get_median(t_stack stack)
 
 	count = 0;
 	j = 0;
-	while (count < stack.len / 2 || count > stack.len / 2)
+	while (count < len / 2 || count > len / 2)
 	{
 		count = 0;
 		i = 0;
 		median = stack.tab[j];
-		while (i < stack.len)
+		while (i < len)
 		{
 			if (stack.tab[i] < median)
 				count++;
