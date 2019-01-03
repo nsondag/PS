@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 23:19:58 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/03 16:06:56 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/03 16:22:18 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ int		next_pivot(t_stack *stack)
 	int i;
 	int pivot;
 	int	found;
-	//int	max;
 
-	//max = get_max(*stack);
 	pivot = 0;
 	found = 0;
 	while (pivot < stack->len && !found)
@@ -64,7 +62,7 @@ void	quick_sort(t_stack *a, t_stack *b, int end)
 		len--;
 	}
 	max = get_max(*a);
-	while (a->tab[a->len - 1] != max)
+	while (a->tab[a->len - 1] != max && end != -1)
 		revrot_a(a, 1);
 	if (b->len && b->tab[b->len - 1] == median)
 		revrot_b(b, 1);
@@ -79,25 +77,17 @@ void	quick_sort2(t_stack *a, t_stack *b, int end)
 	i = 0;
 	(a->tab[0] > a->tab[1] && ft_issorted(a, 0, 1)) ? swap_a(a, 1) : 0;
 	max = get_max(*b);
+	if (b->tab[1] == max && b->len > 0)
+		swap_b(b, 1);
 	if (b->tab[0] == max && b->len > 0 && ft_issorted(a, b->len, a->len))
 		push_a(a, b, 1);
 	if (ft_issorted(a, 0, 0) && b->len > 0)
 	{
 		max = get_max(*b);
 		pivot = next_pivot(b);
-		//printf("%d\n", pivot);
 		while (b->tab[0] != pivot && b->len > 0)
 			push_a(a, b, 1);
 		push_a(a, b, 1);
-		//min = get_min(*a);
-		//max = get_max(*b);
-		//while (max < min)
-		//{
-		//	push_a(a, b, 1);
-		//	min = get_min(*a);
-		//	max = get_max(*b);
-		//}
-
 	}
 	else
 	{
