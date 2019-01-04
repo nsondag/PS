@@ -6,13 +6,13 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 08:43:20 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/03 21:06:59 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/04 23:52:03 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	get_operation(t_stack *a, t_stack *b, char *operation, t_visu *v)
+static int	get_operation(t_stack *a, t_stack *b, char *operation)
 {
 	if (ft_strcmp(operation, "sa") == 0)
 		swap_a(a, 0);
@@ -38,112 +38,50 @@ static int	get_operation(t_stack *a, t_stack *b, char *operation, t_visu *v)
 		revrot_ab(a, b, 0);
 	else
 		return (0);
-	v->on ? visualization(*a, *b, v) : 0;
 	return (1);
 }
 
-int			checker(t_stack *a, t_stack *b, t_visu *v)
+int			checker(t_stack *a, t_stack *b)
 {
 	char		*operation;
 	int			line;
 	static int	count = 0;
 
-	if (v->on)
+	while ((line = get_next_line(0, &operation)) > 0)
 	{
-		if ((line = get_next_line(0, &operation)) > 0)
+		if (!get_operation(a, b, operation))
 		{
-			if (!get_operation(a, b, operation, v))
-			{
-				write(2, "Error\n", 6);
-				return (0);
-			}
-			count++;
-		}
-	}
-	else
-	{
-		while ((line = get_next_line(0, &operation)) > 0)
-		{
-			if (!get_operation(a, b, operation, v))
-			{
-				write(2, "Error\n", 6);
-				return (0);
-			}
+			write(2, "Error\n", 6);
+			return (0);
 		}
 	}
 	if (ft_issorted(a, b->len, 0) && line <= 0)
-	{
-		v->stop = 0;
 		write(1, "OK\n", 3);
-	}
 	else if (line <= 0)
-	{
-		v->stop = 0;
 		write(1, "KO\n", 3);
-	}
 	return (count);
 }
 
-int				loop_hook(t_visu *v)
+int			main(int argc, char **argv)
 {
-	int	count;
-
-	if (v->stop < 0)
-	{
-		if (v->slow == 1)
-			sleep(1);
-		//else 
-		//	usleep(50000);
-		v->img_ptr = mlx_new_image(v->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
-		v->str = mlx_get_data_addr(v->img_ptr, &v->bpp, &v->sl, &v->endian);
-		if (v->stop == -2)
-		{
-			v->stop = 1;
-			visualization(v->a, v->b, v);
-			count = 0;
-		}
-		else
-			count = checker(&v->a, &v->b, v);
-		if (ft_issorted(&v->a, v->b.len, 0))
-			v->stop = 0;
-		mlx_put_image_to_window(v->mlx_ptr, v->win_ptr, v->img_ptr, 0, 0);
-		mlx_destroy_image(v->mlx_ptr, v->img_ptr);
-		mlx_string_put(v->mlx_ptr, v->win_ptr, 1000, 50, 0xFFFFFF, ft_itoa(count));
-	}
-	return (0);
-}
-
-int				main(int argc, char **argv)
-{
+	t_stack	a;
+	t_stack	b;
 	int		check;
-	t_visu	v;
 
-	v.stop = -2;
-	v.slow = -1;
-	v.b.len = 0;
-	v.on = 0;
-	check = parser(&v.a, argv, argc);
+	b.len = 0;
+	check = parser(&a, argv, argc);
 	if (!check)
 		return (0);
-	if (v.a.tab && check > 0)
+	if (a.tab && check > 0)
 	{
-		v.size = v.a.len;
-		if (!(v.b.tab = (int*)malloc(sizeof(int) * v.a.len)))
+		if (!(b.tab = (int*)malloc(sizeof(int) * a.len)))
 		{
-			free(v.a.tab);
+			free(a.tab);
 			return (0);
 		}
-		if (v.on)
-		{
-			v.mlx_ptr = mlx_init();
-			v.win_ptr = mlx_new_window(v.mlx_ptr, WIN_WIDTH, WIN_HEIGHT,
-					"PUSH_SWAP");
-			mlx_key_hook(v.win_ptr, key_hook, &v);
-			mlx_loop_hook(v.mlx_ptr, loop_hook, &v);
-			mlx_loop(v.mlx_ptr);
-		}
-		else
-			checker(&v.a, &v.b, &v);
+		checker(&a, &b);
+		free(b.tab);
+		free(a.tab);
 	}
 	else
 		write(2, "Error\n", 6);

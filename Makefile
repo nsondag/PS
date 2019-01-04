@@ -6,7 +6,7 @@
 #    By: nsondag <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/05 12:33:09 by nsondag           #+#    #+#              #
-#    Updated: 2018/12/11 19:01:27 by nsondag          ###   ########.fr        #
+#    Updated: 2019/01/04 23:52:36 by nsondag          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRC = push.c swap.c reverse_rotate.c rotate.c shift.c\
 
 SRC1 = main.c
 
-SRC2 = main_checker.c visualization.c
+SRC2 = main_checker.c
 
 NAME1 = push_swap
 
@@ -24,20 +24,17 @@ NAME2 = checker
 
 FLAGS = -Wall -Wextra -Werror
 
-FRAME = -framework OpenGL -framework AppKit
-
 .PHONY:  all clean fclean re
 
 all: $(NAME1) $(NAME2)
 
 $(NAME1):
 	@make re -C libft
-	@gcc -o $(NAME1) $(FLAGS) $(SRC) $(SRC1) libft/libft.a
+	@gcc -o $(NAME1) $(SRC) $(SRC1) libft/libft.a
 
 $(NAME2):
 	@make re -C libft
-	@gcc -o $(NAME2) $(FLAGS) -I mlx -g -L mlx -lmlx $(FRAME) $(SRC) $(SRC2)\
-		libft/libft.a
+	@gcc -o $(NAME2) $(FLAGS) $(SRC) $(SRC2) libft/libft.a
 
 clean:
 	@make clean -C libft
