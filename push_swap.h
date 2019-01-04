@@ -6,16 +6,13 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 09:56:52 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/05 00:02:02 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/05 00:37:25 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-# include <unistd.h>
-# include <stdlib.h>
 # include "libft/libft.h"
-# include <stdio.h>
 
 typedef struct	s_stack
 {

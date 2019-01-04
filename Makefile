@@ -6,13 +6,13 @@
 #    By: nsondag <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/05 12:33:09 by nsondag           #+#    #+#              #
-#    Updated: 2019/01/04 23:52:36 by nsondag          ###   ########.fr        #
+#    Updated: 2019/01/05 00:35:43 by nsondag          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC = push.c swap.c reverse_rotate.c rotate.c shift.c\
 	  ft_issorted.c check_validity.c quick_sort.c median.c\
-	  small_sort.c get_extrema.c divide.c parser.c
+	  small_sort.c get_extrema.c parser.c
 
 SRC1 = main.c
 
