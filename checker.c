@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_checker.c                                     :+:      :+:    :+:   */
+/*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 08:43:20 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/04 23:52:03 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/05 12:32:05 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	get_operation(t_stack *a, t_stack *b, char *operation)
 	return (1);
 }
 
-int			checker(t_stack *a, t_stack *b)
+static int	checker(t_stack *a, t_stack *b)
 {
 	char		*operation;
 	int			line;

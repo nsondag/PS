@@ -6,13 +6,13 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 23:19:58 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/05 00:33:59 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/05 12:30:46 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		next_pivot(t_stack *stack)
+static int	next_pivot(t_stack *stack)
 {
 	int i;
 	int pivot;
@@ -41,7 +41,7 @@ int		next_pivot(t_stack *stack)
 	return (stack->tab[pivot]);
 }
 
-void	quick_sort(t_stack *a, t_stack *b, int end)
+void		quick_sort(t_stack *a, t_stack *b, int end)
 {
 	int median;
 	int len;
@@ -68,7 +68,7 @@ void	quick_sort(t_stack *a, t_stack *b, int end)
 		revrot_b(b, 1);
 }
 
-void	quick_sort_b(t_stack *a, t_stack *b, int end)
+static void	quick_sort_b(t_stack *a, t_stack *b, int end)
 {
 	int median;
 	int len;
@@ -89,7 +89,7 @@ void	quick_sort_b(t_stack *a, t_stack *b, int end)
 		revrot_a(a, 1);
 }
 
-void	quick_sort2(t_stack *a, t_stack *b, int end)
+void		quick_sort2(t_stack *a, t_stack *b, int end)
 {
 	int max;
 	int pivot;

@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 09:56:52 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/05 00:37:25 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/05 12:27:54 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ typedef struct	s_stack
 	int len;
 }				t_stack;
 
+int				parser(t_stack *a, char **argv, int argc);
+
 void			push_a(t_stack *a, t_stack *b, int write);
 void			push_b(t_stack *a, t_stack *b, int write);
 void			swap_a(t_stack *a, int write);
@@ -32,18 +34,12 @@ void			revrot_a(t_stack *a, int write);
 void			revrot_b(t_stack *b, int write);
 void			revrot_ab(t_stack *a, t_stack *b, int write);
 
-t_stack			get_numbers(char **s);
-t_stack			get_numbers2(char *s);
+void			left_shift(t_stack *stack);
+void			right_shift(t_stack *stack);
+
 int				get_max(t_stack stack);
 int				get_min(t_stack stack);
 int				get_median(t_stack stack, int len);
-
-int				parser(t_stack *a, char **argv, int argc);
-int				check_validity(char **s);
-int				check_validity2(char *s);
-
-void			left_shift(t_stack *stack);
-void			right_shift(t_stack *stack);
 
 int				ft_issorted(t_stack *a, int len_b, int begin);
 int				ft_isrevsorted(t_stack *a, int len_b, int end);

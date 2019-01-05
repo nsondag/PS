@@ -6,17 +6,17 @@
 #    By: nsondag <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/05 12:33:09 by nsondag           #+#    #+#              #
-#    Updated: 2019/01/05 00:35:43 by nsondag          ###   ########.fr        #
+#    Updated: 2019/01/05 12:31:44 by nsondag          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC = push.c swap.c reverse_rotate.c rotate.c shift.c\
-	  ft_issorted.c check_validity.c quick_sort.c median.c\
-	  small_sort.c get_extrema.c parser.c
+	  parser.c\
+	  ft_issorted.c get_key_values.c quick_sort.c small_sort.c\
 
-SRC1 = main.c
+SRC1 = push_swap.c
 
-SRC2 = main_checker.c
+SRC2 = checker.c
 
 NAME1 = push_swap
 
