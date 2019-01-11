@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/28 01:41:15 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/01 21:41:30 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/11 14:23:13 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	right_shift(t_stack *stack)
 {
 	int count;
 
-	count = stack->len - 1;
-	while (count)
+	count = stack->len;
+	while (count > 0)
 	{
 		stack->tab[count] = stack->tab[count - 1];
 		count--;
