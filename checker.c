@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 08:43:20 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/05 12:32:05 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/11 15:26:01 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,8 @@ static int	checker(t_stack *a, t_stack *b)
 {
 	char		*operation;
 	static int	count = 0;
-	int		line;
+	int			line;
 
-	
 	while ((line = get_next_line(0, &operation)) > 0)
 	{
 		if (!get_operation(a, b, operation))
