@@ -44,17 +44,21 @@ static int	get_operation(t_stack *a, t_stack *b, char *operation)
 static int	checker(t_stack *a, t_stack *b)
 {
 	char		*operation;
-	int			line;
 	static int	count = 0;
+	int		line;
 
+	
 	while ((line = get_next_line(0, &operation)) > 0)
 	{
 		if (!get_operation(a, b, operation))
 		{
+			free(operation);
 			write(2, "Error\n", 6);
 			return (0);
 		}
+		free(operation);
 	}
+	free(operation);
 	if (ft_issorted(a, b->len, 0) && line <= 0)
 		write(1, "OK\n", 3);
 	else if (line <= 0)

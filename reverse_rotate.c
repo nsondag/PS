@@ -15,11 +15,9 @@
 static void	revrot(t_stack *stack)
 {
 	int	last;
-	int i;
 
 	if (stack->len)
 	{
-		i = stack->len;
 		last = stack->tab[stack->len - 1];
 		right_shift(stack);
 		stack->tab[0] = last;

@@ -28,7 +28,7 @@ void	right_shift(t_stack *stack)
 {
 	int count;
 
-	count = stack->len;
+	count = stack->len - 1;
 	while (count)
 	{
 		stack->tab[count] = stack->tab[count - 1];
