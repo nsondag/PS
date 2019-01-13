@@ -6,14 +6,14 @@
 #    By: nsondag <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/14 21:09:08 by nsondag           #+#    #+#              #
-#    Updated: 2018/12/12 15:01:38 by nsondag          ###   ########.fr        #
+#    Updated: 2019/01/13 19:09:35 by nsondag          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC = ft_memset.c\
 	  ft_bzero.c\
 	  ft_strnew.c\
-	  ft_atoi.c\
+	  ft_atol.c\
 	  ft_isdigit.c\
 	  ft_strsplit.c\
 	  word_count.c\

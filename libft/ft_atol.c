@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 11:19:24 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/02 18:17:26 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/13 19:08:16 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+long	ft_atol(const char *str)
 {
 	int		sign;
 	long	nbr;
@@ -34,5 +34,5 @@ int	ft_atoi(const char *str)
 		nbr = nbr * 10 + *str - '0';
 		str++;
 	}
-	return (sign * (int)nbr);
+	return (sign * nbr);
 }

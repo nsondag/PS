@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 21:43:18 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/05 12:29:41 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/13 19:12:41 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static t_stack	get_numbers(char **s)
 	while (stack.tab && s[stack.len])
 	{
 		j = 0;
-		stack.tab[stack.len] = ft_atoi(s[stack.len]);
+		stack.tab[stack.len] = ft_atol(s[stack.len]);
 		while (j < stack.len && stack.tab)
 		{
 			if (stack.tab[j++] == stack.tab[stack.len])
@@ -53,7 +53,7 @@ static t_stack	get_numbers2(char *s)
 	while (stack.tab && tab[stack.len])
 	{
 		k = 0;
-		stack.tab[stack.len] = ft_atoi(tab[stack.len]);
+		stack.tab[stack.len] = ft_atol(tab[stack.len]);
 		while (k < stack.len && stack.tab)
 		{
 			if (stack.tab[k] == stack.tab[stack.len])
@@ -83,8 +83,8 @@ static int		check_validity(char **s)
 			return (0);
 		while (ft_isdigit(s[i][j]))
 			j++;
-		if (((j > 11 || ft_atoi(s[i]) * sign < 0) &&
-					!(ft_atoi(s[i]) == -2147483648)) || s[i][j])
+		if ((j > 11 || ft_atol(s[i]) > 2147483647 ||
+						ft_atol(s[i]) < -2147483648) && s[i][j])
 			return (0);
 		i++;
 	}
@@ -111,8 +111,8 @@ static int		check_validity2(char *s)
 		}
 		if (s[i] && s[i] != ' ')
 			return (0);
-		if (((j > 11 || ft_atoi(&s[i - j - 1]) * sign < 0) &&
-					!(ft_atoi(&s[i - j]) == -2147483648)))
+		if (((j > 11 || ft_atol(&s[i - j - 1]) * sign < 0) &&
+					!(ft_atol(&s[i - j]) == -2147483648)))
 			return (0);
 		while (s[i] == ' ')
 			i++;

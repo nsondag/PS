@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 19:21:07 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/13 19:03:29 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/13 19:07:50 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_strcpy(char *dst, const char *src);
 int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strncpy(char *dst, const char *src, size_t len);
 char	*ft_strcat(char *s1, const char *s2);
-int		ft_atoi(const char *str);
+long	ft_atol(const char *str);
 char	*ft_strnew(size_t size);
 char	*ft_strsub(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
