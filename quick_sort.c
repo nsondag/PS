@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 23:19:58 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/05 12:30:46 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/13 18:58:36 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,11 @@ void		quick_sort(t_stack *a, t_stack *b, int end)
 		revrot_b(b, 1);
 }
 
-static void	quick_sort_b(t_stack *a, t_stack *b, int end)
+static void	quick_sort_b(t_stack *a, t_stack *b)
 {
 	int median;
 	int len;
 
-	len = end;
 	len = b->len;
 	median = get_median(*b, len);
 	while (len)
@@ -102,7 +101,7 @@ void		quick_sort2(t_stack *a, t_stack *b, int end)
 	{
 		pivot = next_pivot(b);
 		if (pivot == b->tab[b->len - 1] && b->len > 1)
-			quick_sort_b(a, b, b->len);
+			quick_sort_b(a, b);
 		else
 		{
 			while (b->tab[0] != pivot && b->len > 0)

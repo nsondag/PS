@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 08:43:20 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/05 12:47:42 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/13 19:00:03 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ int			main(int argc, char **argv)
 
 	b.len = 0;
 	check = parser(&a, argv, argc);
-	if (!check)
-		return (0);
 	(a.tab && check > 0) ? sort(&a, &b) : write(2, "Error\n", 6);
 	free(a.tab);
 	free(b.tab);

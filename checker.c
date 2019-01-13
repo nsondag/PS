@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 08:43:20 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/11 15:26:01 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/13 19:00:20 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static int	get_operation(t_stack *a, t_stack *b, char *operation)
 static int	checker(t_stack *a, t_stack *b)
 {
 	char		*operation;
-	static int	count = 0;
 	int			line;
 
 	while ((line = get_next_line(0, &operation)) > 0)
@@ -58,11 +57,11 @@ static int	checker(t_stack *a, t_stack *b)
 		free(operation);
 	}
 	free(operation);
-	if (ft_issorted(a, b->len, 0) && line <= 0)
+	if (ft_issorted(a, b->len, 0))
 		write(1, "OK\n", 3);
-	else if (line <= 0)
+	else
 		write(1, "KO\n", 3);
-	return (count);
+	return (1);
 }
 
 int			main(int argc, char **argv)
@@ -73,8 +72,6 @@ int			main(int argc, char **argv)
 
 	b.len = 0;
 	check = parser(&a, argv, argc);
-	if (!check)
-		return (0);
 	if (a.tab && check > 0)
 	{
 		if (!(b.tab = (int*)malloc(sizeof(int) * a.len)))
