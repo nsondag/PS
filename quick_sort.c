@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 23:19:58 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/14 00:21:00 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/14 00:27:50 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static void	quick_sort_b(t_stack *a, t_stack *b, int end)
 		revrot_a(a, 1);
 }
 
-void		quick_sort2(t_stack *a, t_stack *b, int end)
+void		quick_sort2(t_stack *a, t_stack *b)
 {
 	int max;
 	int pivot;
@@ -119,8 +119,8 @@ void		quick_sort2(t_stack *a, t_stack *b, int end)
 		}
 		return ;
 	}
-	end = 0;
-	while (!ft_issorted(a, 0, end))
-		end++;
-	(!ft_issorted(a, 0, 0)) ? quick_sort(a, b, end + 1) : 0;
+	i = 0;
+	while (!ft_issorted(a, 0, i))
+		i++;
+	(!ft_issorted(a, 0, 0)) ? quick_sort(a, b, i + 1) : 0;
 }
