@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 09:56:52 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/05 12:27:54 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/13 21:32:23 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,7 @@ void			right_shift(t_stack *stack);
 int				get_max(t_stack stack);
 int				get_min(t_stack stack);
 int				get_median(t_stack stack, int len);
-
 int				ft_issorted(t_stack *a, int len_b, int begin);
-int				ft_isrevsorted(t_stack *a, int len_b, int end);
 
 void			quick_sort(t_stack *a, t_stack *b, int end);
 void			quick_sort2(t_stack *a, t_stack *b, int end);
