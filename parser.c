@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 21:43:18 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/13 19:12:41 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/13 20:01:49 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,35 +37,6 @@ static t_stack	get_numbers(char **s)
 	return (stack);
 }
 
-static t_stack	get_numbers2(char *s)
-{
-	int		k;
-	t_stack	stack;
-	char	**tab;
-
-	stack.len = 0;
-	tab = ft_strsplit(s, ' ');
-	while (tab[stack.len++])
-		;
-	if (!(stack.tab = (int*)malloc(sizeof(int) * stack.len)))
-		stack.tab = NULL;
-	stack.len = 0;
-	while (stack.tab && tab[stack.len])
-	{
-		k = 0;
-		stack.tab[stack.len] = ft_atol(tab[stack.len]);
-		while (k < stack.len && stack.tab)
-		{
-			if (stack.tab[k] == stack.tab[stack.len])
-				stack.tab = NULL;
-			k++;
-		}
-		stack.len++;
-	}
-	free(tab);
-	return (stack);
-}
-
 static int		check_validity(char **s)
 {
 	int		i;
@@ -83,39 +54,10 @@ static int		check_validity(char **s)
 			return (0);
 		while (ft_isdigit(s[i][j]))
 			j++;
-		if ((j > 11 || ft_atol(s[i]) > 2147483647 ||
-						ft_atol(s[i]) < -2147483648) && s[i][j])
+		if (j > 11 || ft_atol(s[i]) > 2147483647 ||
+						ft_atol(s[i]) < -2147483648 || s[i][j])
 			return (0);
 		i++;
-	}
-	return (1);
-}
-
-static int		check_validity2(char *s)
-{
-	int		i;
-	int		j;
-	int		sign;
-
-	i = 0;
-	while (s[i])
-	{
-		sign = 1;
-		j = 0;
-		if ((s[i] == '-' || s[i] == '+') && ft_isdigit(s[i + 1]))
-			sign = s[i++] == '-' ? -1 : 1;
-		while (ft_isdigit(s[i]) && s[i])
-		{
-			i++;
-			j++;
-		}
-		if (s[i] && s[i] != ' ')
-			return (0);
-		if (((j > 11 || ft_atol(&s[i - j - 1]) * sign < 0) &&
-					!(ft_atol(&s[i - j]) == -2147483648)))
-			return (0);
-		while (s[i] == ' ')
-			i++;
 	}
 	return (1);
 }
@@ -128,8 +70,8 @@ int				parser(t_stack *a, char **argv, int argc)
 		return (0);
 	if (argc == 2)
 	{
-		check = check_validity2(argv[1]);
-		*a = get_numbers2(argv[1]);
+		check = check_validity(ft_strsplit(argv[1], ' '));
+		*a = get_numbers(ft_strsplit(argv[1], ' '));
 	}
 	else
 	{
