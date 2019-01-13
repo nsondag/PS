@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 19:21:07 by nsondag           #+#    #+#             */
-/*   Updated: 2018/12/12 15:02:33 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/13 19:03:29 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 # include <limits.h>
-# define BUFF_SIZE 10000
+# define BUFF_SIZE 4
 
 void	*ft_memset(void *b, int c, size_t len);
 void	ft_bzero(void *s, size_t n);
