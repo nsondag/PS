@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 23:19:58 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/13 21:31:53 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/14 00:21:00 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,17 @@ void		quick_sort(t_stack *a, t_stack *b, int end)
 		revrot_b(b, 1);
 }
 
-static void	quick_sort_b(t_stack *a, t_stack *b)
+static void	quick_sort_b(t_stack *a, t_stack *b, int end)
 {
 	int median;
 	int len;
+	int	min;
 
-	len = b->len;
+	min = b->tab[b->len - 1];
+	if (end == -1)
+		len = b->len;
+	else
+		len = end;
 	median = get_median(*b, len);
 	while (len)
 	{
@@ -84,6 +89,8 @@ static void	quick_sort_b(t_stack *a, t_stack *b)
 		a->tab[0] == median ? rot_a(a, 1) : 0;
 		len--;
 	}
+	while (b->tab[b->len - 1] != min && end != -1)
+		revrot_b(b, 1);
 	if (a->len && a->tab[a->len - 1] == median)
 		revrot_a(a, 1);
 }
@@ -92,7 +99,9 @@ void		quick_sort2(t_stack *a, t_stack *b, int end)
 {
 	int max;
 	int pivot;
+	int	i;
 
+	i = 0;
 	(a->tab[0] > a->tab[1] && ft_issorted(a, 0, 1)) ? swap_a(a, 1) : 0;
 	max = get_max(*b);
 	(b->tab[1] == max && b->len > 0) ? swap_b(b, 1) : 0;
@@ -101,18 +110,17 @@ void		quick_sort2(t_stack *a, t_stack *b, int end)
 	{
 		pivot = next_pivot(b);
 		if (pivot == b->tab[b->len - 1] && b->len > 1)
-			quick_sort_b(a, b);
+			quick_sort_b(a, b, -1);
 		else
 		{
-			while (b->tab[0] != pivot && b->len > 0)
-				push_a(a, b, 1);
-			push_a(a, b, 1);
+			while (b->tab[i] != pivot && b->len > 0)
+				i++;
+			quick_sort_b(a, b, i);
 		}
 		return ;
 	}
 	end = 0;
 	while (!ft_issorted(a, 0, end))
 		end++;
-	end < 25 ? sort5(a, b) : 0;
 	(!ft_issorted(a, 0, 0)) ? quick_sort(a, b, end + 1) : 0;
 }
