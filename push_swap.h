@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 09:56:52 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/14 15:40:40 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/14 15:46:47 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int				get_min(t_stack stack);
 int				get_median(t_stack stack, int len);
 int				ft_issorted(t_stack *a, int len_b, int begin);
 
-void			quick_sort(t_stack *a, t_stack *b, int end);
-void			quick_sort2(t_stack *a, t_stack *b);
+void			quick_sort_a(t_stack *a, t_stack *b, int end);
+void			quick_sort(t_stack *a, t_stack *b);
 void			sort3(t_stack *a);
 void			sort5(t_stack *a, t_stack *b);
 
