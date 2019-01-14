@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 23:19:58 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/14 00:27:50 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/14 15:43:27 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,9 @@ void		quick_sort2(t_stack *a, t_stack *b)
 			quick_sort_b(a, b, -1);
 		else
 		{
-			while (b->tab[i] != pivot && b->len > 0)
+			while (b->tab[i] != pivot && b->len > 1)
 				i++;
-			quick_sort_b(a, b, i);
+			!i ? push_a(a, b, 1) : quick_sort_b(a, b, i);
 		}
 		return ;
 	}
