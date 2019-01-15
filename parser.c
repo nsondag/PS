@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 21:43:18 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/15 12:06:48 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/15 13:32:40 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,27 +62,49 @@ static int		check_validity(char **s)
 	return (1);
 }
 
+static void		parse_option(char *s)
+{
+	t_visu v;
+
+	s++;
+	while (*s)
+	{
+		if (*s == 'v')
+			v.on = 1;
+		else
+		{
+			write(1, "Invalid Option\n", 15);
+			exit(0);
+		}
+		s++;
+	}
+}
+
 int				parser(t_stack *a, char **argv, int argc)
 {
-	int check;
-	char **tab;
+	int		check;
+	char	**tab;
+	int		min_arg;
 
-	if (argc < 2)
-		return (0);
-	if (argc == 2)
+	min_arg = 2;
+	while (argv[min_arg - 1][0] == '-')
 	{
-		tab = ft_strsplit(argv[1], ' ');
+		parse_option(argv[min_arg - 1]);
+		min_arg++;
+	}
+	if (argc < min_arg)
+		return (0);
+	if (argc == min_arg)
+	{
+		tab = ft_strsplit(argv[min_arg - 1], ' ');
 		check = check_validity(tab);
 		*a = get_numbers(tab);
 		free(tab);
 	}
 	else
 	{
-		check = check_validity(&argv[1]);
-		*a = get_numbers(&argv[1]);
+		check = check_validity(&argv[min_arg - 1]);
+		*a = get_numbers(&argv[min_arg - 1]);
 	}
-	if (check && a->tab)
-		return (1);
-	else
-		return (-1);
+	return ((check && a->tab) ? 1 : -1);
 }

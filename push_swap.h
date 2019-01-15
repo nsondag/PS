@@ -6,19 +6,48 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 09:56:52 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/14 15:46:47 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/15 12:42:33 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include "libft/libft.h"
+# include "mlx/mlx.h"
+
+# define WIN_HEIGHT 1005
+# define WIN_WIDTH 1200
 
 typedef struct	s_stack
 {
 	int *tab;
 	int len;
 }				t_stack;
+
+typedef	union	u_color
+{
+	int				i;
+	unsigned char	tab[4];
+}				t_color;
+
+typedef struct	s_visu
+{
+	int			bpp;
+	int			sl;
+	int			endian;
+
+	void		*mlx_ptr;
+	void		*win_ptr;
+	void		*img_ptr;
+	void		*data_ptr;
+	char		*str;
+	t_stack		a;
+	t_stack		b;
+	int			stop;
+	int			slow;
+	int			on;
+	int			size;
+}				t_visu;
 
 int				parser(t_stack *a, char **argv, int argc);
 

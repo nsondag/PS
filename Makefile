@@ -6,7 +6,7 @@
 #    By: nsondag <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/05 12:33:09 by nsondag           #+#    #+#              #
-#    Updated: 2019/01/05 12:31:44 by nsondag          ###   ########.fr        #
+#    Updated: 2019/01/15 12:43:49 by nsondag          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,18 +24,20 @@ NAME2 = checker
 
 FLAGS = -Wall -Wextra -Werror
 
+FRAME = -framework OpenGL -framework AppKit
+
 .PHONY:  all clean fclean re
 
 all: $(NAME1) $(NAME2)
 
 $(NAME1):
 	@make re -C libft
-	@gcc -o $(NAME1) $(SRC) $(SRC1) libft/libft.a
+	@gcc -o $(NAME1) $(FLAGS) $(SRC) $(SRC1) libft/libft.a
 
 $(NAME2):
 	@make re -C libft
-	@gcc -o $(NAME2) $(FLAGS) $(SRC) $(SRC2) libft/libft.a
-
+	@gcc -o $(NAME2) $(FLAGS) -I mlx -g -L mlx -lmlx $(FRAME) $(SRC) $(SRC2)\
+				libft/libft.a
 clean:
 	@make clean -C libft
 
