@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 21:43:18 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/13 20:01:49 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/15 12:06:48 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,16 @@ static int		check_validity(char **s)
 int				parser(t_stack *a, char **argv, int argc)
 {
 	int check;
+	char **tab;
 
 	if (argc < 2)
 		return (0);
 	if (argc == 2)
 	{
-		check = check_validity(ft_strsplit(argv[1], ' '));
-		*a = get_numbers(ft_strsplit(argv[1], ' '));
+		tab = ft_strsplit(argv[1], ' ');
+		check = check_validity(tab);
+		*a = get_numbers(tab);
+		free(tab);
 	}
 	else
 	{
