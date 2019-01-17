@@ -6,7 +6,7 @@
 #    By: nsondag <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/05 12:33:09 by nsondag           #+#    #+#              #
-#    Updated: 2019/01/15 12:43:49 by nsondag          ###   ########.fr        #
+#    Updated: 2019/01/16 08:30:48 by nsondag          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRC = push.c swap.c reverse_rotate.c rotate.c shift.c\
 
 SRC1 = push_swap.c
 
-SRC2 = checker.c
+SRC2 = visualization.c checker.c
 
 NAME1 = push_swap
 

@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 08:43:20 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/14 15:47:21 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/17 21:41:54 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ static int	sort(t_stack *a, t_stack *b)
 		return (0);
 	if (!ft_issorted(a, b->len, 0) && a->len > 20)
 	{
-		while (a->len > 2 && !ft_issorted(a, 0, 0))
+		while (a->len > 20 && !ft_issorted(a, 0, 0))
 			quick_sort_a(a, b, -1);
+		sort5(a, b);
 		while (!ft_issorted(a, b->len, 0))
 			quick_sort(a, b);
 	}
@@ -43,7 +44,7 @@ int			main(int argc, char **argv)
 	int		check;
 
 	b.len = 0;
-	check = parser(&a, argv, argc);
+	check = parser(&a, argv, argc, NULL);
 	(a.tab && check > 0) ? sort(&a, &b) : write(2, "Error\n", 6);
 	free(a.tab);
 	free(b.tab);
