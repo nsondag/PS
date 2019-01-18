@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 23:19:58 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/18 00:59:02 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/18 04:32:36 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,12 @@ void		quick_sort_a(t_stack *a, t_stack *b, int end)
 	int median;
 	int len;
 	int	max;
-	int	i;
-	int	quartile;
 
 	if (end == -1)
 		len = a->len;
 	else
 		len = end;
 	median = get_median(*a, len);
-	quartile = get_quartile(*a, 3, len);
 	while (len)
 	{
 		if (a->tab[0] <= median)
@@ -64,12 +61,7 @@ void		quick_sort_a(t_stack *a, t_stack *b, int end)
 		(b->tab[0] == median && len > 1) ? rot_b(b, 1) : 0;
 		len--;
 	}
-	i = 1;
 	max = get_max(*a);
-	while (a->len - i > 0 && a->tab[a->len - i] != max && end != -1)
-		i++;
-	while (a->tab[a->len - i] <= quartile && end != -1)
-		i--;
 	while (a->tab[a->len - 1] != max && end != -1)
 		revrot_a(a, 1);
 	if (b->len && b->tab[b->len - 1] == median)
@@ -81,17 +73,13 @@ static void	quick_sort_b(t_stack *a, t_stack *b, int end)
 	int median;
 	int len;
 	int	min;
-	int	i;
-	int	quartile;
 
-	i = 1;
 	min = b->tab[b->len - 1];
 	if (end == -1)
 		len = b->len;
 	else
 		len = end;
 	median = get_median(*b, len);
-	quartile = get_quartile(*a, 1, len);
 	while (len)
 	{
 		if (b->tab[0] >= median)
@@ -101,11 +89,7 @@ static void	quick_sort_b(t_stack *a, t_stack *b, int end)
 		(a->tab[0] == median && len > 1) ? rot_a(a, 1) : 0;
 		len--;
 	}
-	while (b->len - i > 0 && b->tab[b->len - i] != min && end != -1)
-		i++;
-	while (b->len - i > 0 && b->tab[b->len - i] >= quartile && end != -1)
-		i++;
-	while (b->len - i > 0 && b->tab[b->len - 1] != min && end != -1)
+	while (b->tab[b->len - 1] != min && end != -1)
 		revrot_b(b, 1);
 	if (a->len && a->tab[a->len - 1] == median)
 		revrot_a(a, 1);
@@ -131,7 +115,7 @@ void		quick_sort(t_stack *a, t_stack *b)
 		{
 			while (b->tab[i] != pivot && b->len > 1)
 				i++;
-			!i ? push_a(a, b, 1) : quick_sort_b(a, b, i);
+			i < 10 ? revsort5(a, b, i) : quick_sort_b(a, b, i);
 		}
 		return ;
 	}

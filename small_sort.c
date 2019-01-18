@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 17:21:14 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/18 01:22:42 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/18 04:32:34 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,29 @@ void	sort5(t_stack *a, t_stack *b)
 	a->tab[0] > a->tab[1] ? swap_a(a, 1) : 0;
 	while (count--)
 		push_a(a, b, 1);
+}
+
+void	revsort5(t_stack *a, t_stack *b, int k)
+{
+	int i;
+	int i_max;
+	int max;
+	int count;
+
+	count = 0;
+	while (k--)
+	{
+		i = 0;
+		max = get_max(*b);
+		while (b->tab[i] != max)
+			i++;
+		i_max = i;
+		while (i_max <= b->len / 2 && b->tab[0] != max)
+			rot_b(b, 1);
+		while (i_max > b->len / 2 && b->tab[0] != max)
+			revrot_b(b, 1);
+		push_a(a, b, 1);
+		count++;
+	}
+	push_a(a, b, 1);
 }

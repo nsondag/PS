@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 09:56:52 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/18 00:47:46 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/18 03:50:22 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,13 @@ int				get_min(t_stack stack);
 int				get_median(t_stack stack, int len);
 int				get_quartile(t_stack stack, int i, int len);
 int				ft_issorted(t_stack *a, int len_b, int begin);
+int				ft_isrevsorted(t_stack *a, int len_b, int begin);
 
 void			quick_sort_a(t_stack *a, t_stack *b, int end);
 void			quick_sort(t_stack *a, t_stack *b);
 void			sort3(t_stack *a);
 void			sort5(t_stack *a, t_stack *b);
+void			revsort5(t_stack *a, t_stack *b, int k);
 
 int				key_hook(int keycode, t_visu *v);
 int				visualization(t_stack a, t_stack b, t_visu *v);

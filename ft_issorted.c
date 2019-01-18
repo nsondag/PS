@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/28 05:48:32 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/13 21:31:49 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/18 03:37:02 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,22 @@ int		ft_issorted(t_stack *a, int len_b, int begin)
 	while (i < a->len - 1)
 	{
 		if (a->tab[i] > a->tab[i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int		ft_isrevsorted(t_stack *a, int len_b, int begin)
+{
+	int i;
+
+	i = begin;
+	if (len_b)
+		return (0);
+	while (i < a->len - 1)
+	{
+		if (a->tab[i] < a->tab[i + 1])
 			return (0);
 		i++;
 	}
