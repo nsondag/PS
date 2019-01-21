@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 08:43:20 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/21 11:44:57 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/21 12:31:15 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,9 @@ static void	visu_init(t_visu *v)
 int			main(int argc, char **argv)
 {
 	t_visu	v;
+	int		check;
 
-	if (v.a.tab && parser(&v.a, argv, argc, &v) > 0)
+	if ((check = parser(&v.a, argv, argc, &v)) > 0 && v.a.tab)
 	{
 		v.size = v.a.len;
 		if (!(v.b.tab = (int*)malloc(sizeof(int) * v.a.len)))
@@ -126,7 +127,7 @@ int			main(int argc, char **argv)
 		free(v.b.tab);
 		free(v.a.tab);
 	}
-	else
+	else if (check < 0)
 		write(2, "Error\n", 6);
 	return (0);
 }
