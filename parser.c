@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 21:43:18 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/21 11:44:15 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/21 12:12:46 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void		parse_option(char *s, t_visu *v)
 			v->on = 1;
 		else
 		{
-			write(1, "Invalid Option\n", 15);
+			write(2, "Error\n", 6);
 			exit(0);
 		}
 		s++;
