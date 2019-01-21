@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 23:19:58 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/21 08:04:22 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/21 09:26:24 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,77 +43,47 @@ static int	next_pivot(t_stack *stack)
 
 void		quick_sort_a(t_stack *a, t_stack *b, int end)
 {
-	int median;
-	int len;
-	int	max;
-	int min;
-	int	i = 0;
-	int	count = 0;
+	int i[4];
 
-	if (end == -1)
-		len = a->len;
-	else
-		len = end;
-	median = get_median(*a, len);
-	min = get_min(*a);
-	while (len && median >= min)
+	ft_bzero(i, 4);
+	i[MEDIAN] = get_median(*a, end);
+	while ((i[MIN] = get_min(*a)) <= i[MEDIAN])
 	{
-		if (a->tab[0] <= median)
-			push_b(a, b, 1);
-		else
-			rot_a(a, 1);
-		(b->tab[0] == median && len > 1) ? rot_b(b, 1) : 0;
-		len--;
-		min = get_min(*a);
+		(a->tab[0] <= i[MEDIAN]) ? push_b(a, b, 1) : rot_a(a, 1);
+		(b->tab[0] == i[MEDIAN]) ? rot_b(b, 1) : 0;
 	}
-	max = get_max(*a);
-	i = 0;
-	while (a->tab[a->len - 1] != max && end != -1)
-	{
+	i[MAX] = get_max(*a);
+	while (a->tab[a->len - 1] != i[MAX] && end != -1 && i[COUNT]++ >= 0)
 		revrot_a(a, 0);
-		count++;
-	}
-	while (!ft_issorted(a, 0, i))
-		i++;
-	while (count-- > 0)
+	while (!ft_issorted(a, 0, i[S]))
+		i[S]++;
+	while (i[COUNT]-- > 0)
 		rot_a(a, 0);
-	if (i >= 20)
+	if (i[S] >= 20)
 	{
-		while (a->tab[a->len - 2] != max && end != -1)
+		while (a->tab[a->len - 2] != i[MAX] && end != -1)
 			revrot_a(a, 1);
-		if (b->len && b->tab[b->len - 1] == median)
-			revrot_ab(a, b, 1);
-		else if (a->tab[a->len - 1] != max && end != -1)
-			revrot_a(a, 1);
+		b->len && b->tab[b->len - 1] == i[MEDIAN] ? revrot_ab(a, b, 1) : 0;
+		return ;
 	}
-	else
-	{
-		if (b->len && b->tab[b->len - 1] == median)
-			revrot_b(b, 1);
-		sort5(a, b);
-	}
+	(b->len && b->tab[b->len - 1] == i[MEDIAN]) ? revrot_b(b, 1) : 0;
+	sort5(a, b);
 }
 
 static void	quick_sort_b(t_stack *a, t_stack *b, int end)
 {
 	int median;
-	int len;
 	int	min;
 	int max;
 
 	min = b->tab[b->len - 1];
-	len = (end == -1) ? b->len : end;
-	median = get_median(*b, len);
+	median = get_median(*b, end);
 	max = get_max(*b);
-	while (len && median <= max)
+	while (median <= max)
 	{
 		max = get_max(*b);
-		if (b->tab[0] >= median)
-			push_a(a, b, 1);
-		else
-			rot_b(b, 1);
-		(a->tab[0] == median && len > 1) ? rot_a(a, 1) : 0;
-		len--;
+		b->tab[0] >= median ? push_a(a, b, 1) : rot_b(b, 1);
+		(a->tab[0] == median) ? rot_a(a, 1) : 0;
 	}
 	while (b->tab[b->len - 2] != min && end != -1)
 		revrot_b(b, 1);

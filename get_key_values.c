@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 20:29:28 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/18 00:59:00 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/21 09:27:05 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	get_median(t_stack stack, int len)
 	int median;
 	int count;
 
+	len = (len == -1) ? stack.len : len;
 	count = 0;
 	j = 0;
 	while (count < len / 2 || count > len / 2)

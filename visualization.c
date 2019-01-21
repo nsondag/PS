@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 18:15:59 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/16 14:01:34 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/21 09:29:51 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	visu_tab(t_visu v, t_stack a, int shift, int size)
 	t_color	color;
 	int		value;
 
-
 	i = -1;
 	while (++i < a.len)
 	{
@@ -84,6 +83,6 @@ int		visualization(t_stack a, t_stack b, t_visu *v)
 		size = 2;
 	mlx_key_hook(v->win_ptr, key_hook, v);
 	visu_tab(*v, a, 0, size);
-	visu_tab(*v, b, WIN_WIDTH/2, size);
+	visu_tab(*v, b, WIN_WIDTH / 2, size);
 	return (1);
 }

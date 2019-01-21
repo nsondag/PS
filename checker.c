@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 08:43:20 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/17 14:26:43 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/21 09:29:02 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static int	checker(t_stack *a, t_stack *b, t_visu *v)
 	return (count);
 }
 
-int				loop_hook(t_visu *v)
+int			loop_hook(t_visu *v)
 {
 	int	count;
 
@@ -112,7 +112,7 @@ int				loop_hook(t_visu *v)
 
 int			main(int argc, char **argv)
 {
-	t_visu 	v;
+	t_visu	v;
 	int		check;
 
 	v.stop = -2;
