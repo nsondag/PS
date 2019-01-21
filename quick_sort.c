@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 23:19:58 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/18 04:32:36 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/21 02:09:37 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,17 @@ void		quick_sort_a(t_stack *a, t_stack *b, int end)
 	int median;
 	int len;
 	int	max;
+	int min;
 
 	if (end == -1)
 		len = a->len;
 	else
 		len = end;
 	median = get_median(*a, len);
-	while (len)
+	min = get_min(*a);
+	while (len && median >= min)
 	{
+		min = get_min(*a);
 		if (a->tab[0] <= median)
 			push_b(a, b, 1);
 		else
@@ -73,6 +76,7 @@ static void	quick_sort_b(t_stack *a, t_stack *b, int end)
 	int median;
 	int len;
 	int	min;
+	int max;
 
 	min = b->tab[b->len - 1];
 	if (end == -1)
@@ -80,8 +84,10 @@ static void	quick_sort_b(t_stack *a, t_stack *b, int end)
 	else
 		len = end;
 	median = get_median(*b, len);
-	while (len)
+	max = get_max(*b);
+	while (len && median <= max)
 	{
+		max = get_max(*b);
 		if (b->tab[0] >= median)
 			push_a(a, b, 1);
 		else
