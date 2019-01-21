@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 09:56:52 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/21 09:27:28 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/21 10:40:36 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@
 # define S 1
 # define COUNT 2
 # define MEDIAN 3
+# define I 0
+# define J 1
+# define K 2
+# define L 3
+# define VALUE 4
 
 typedef struct	s_stack
 {

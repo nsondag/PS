@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 18:15:59 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/21 09:29:51 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/21 10:41:43 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,32 +42,28 @@ int		key_hook(int keycode, t_visu *v)
 
 void	visu_tab(t_visu v, t_stack a, int shift, int size)
 {
-	int		i;
-	int		j;
-	int		k;
-	int		l;
+	int		index[5];
 	t_color	color;
-	int		value;
 
-	i = -1;
-	while (++i < a.len)
+	index[I] = -1;
+	while (++index[I] < a.len)
 	{
 		color.i = 0xFF3300;
-		j = -1;
-		value = a.tab[i];
-		if (value < 0)
+		index[J] = -1;
+		if ((index[VALUE] = a.tab[index[I]]) < 0)
 		{
-			value = -value;
+			index[VALUE] = -index[VALUE];
 			color.i = 0x33FF00;
 		}
-		while (++j < value)
+		while (++index[J] < index[VALUE])
 		{
-			k = -1;
-			while (++k < size / 2)
+			index[K] = -1;
+			while (++index[K] < size / 2)
 			{
-				l = -1;
-				while (++l < size - 1)
-					fill_pixel(&v, size / 2 * j + k + shift, i * size + l, color);
+				index[L] = -1;
+				while (++index[L] < size - 1)
+					fill_pixel(&v, size / 2 * index[J] + index[K] + shift,
+							index[I] * size + index[L], color);
 			}
 		}
 	}
