@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 09:56:52 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/18 03:50:22 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/21 07:40:44 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PUSH_SWAP_H
 # include "libft/libft.h"
 # include "mlx/mlx.h"
-# include <stdio.h>
 
 # define WIN_HEIGHT 1005
 # define WIN_WIDTH 1200

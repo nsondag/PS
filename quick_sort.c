@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 23:19:58 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/21 02:09:37 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/21 07:40:40 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void		quick_sort_a(t_stack *a, t_stack *b, int end)
 	int len;
 	int	max;
 	int min;
+	int	i = 0;
+	int	count = 0;
 
 	if (end == -1)
 		len = a->len;
@@ -56,19 +58,40 @@ void		quick_sort_a(t_stack *a, t_stack *b, int end)
 	min = get_min(*a);
 	while (len && median >= min)
 	{
-		min = get_min(*a);
 		if (a->tab[0] <= median)
 			push_b(a, b, 1);
 		else
 			rot_a(a, 1);
 		(b->tab[0] == median && len > 1) ? rot_b(b, 1) : 0;
 		len--;
+		min = get_min(*a);
 	}
 	max = get_max(*a);
+	i = 0;
 	while (a->tab[a->len - 1] != max && end != -1)
-		revrot_a(a, 1);
-	if (b->len && b->tab[b->len - 1] == median)
-		revrot_b(b, 1);
+	{
+		revrot_a(a, 0);
+		count++;
+	}
+	while (!ft_issorted(a, 0, i))
+		i++;
+	while (count-- > 0)
+		rot_a(a, 0);
+	if (i >= 20)
+	{
+		while (a->tab[a->len - 2] != max && end != -1)
+			revrot_a(a, 1);
+		if (b->len && b->tab[b->len - 1] == median)
+			revrot_ab(a, b, 1);
+		else if (a->tab[a->len - 1] != max && end != -1)
+			revrot_a(a, 1);
+	}
+	else
+	{
+		if (b->len && b->tab[b->len - 1] == median)
+			revrot_b(b, 1);	
+		sort5(a, b);
+	}
 }
 
 static void	quick_sort_b(t_stack *a, t_stack *b, int end)
@@ -95,10 +118,12 @@ static void	quick_sort_b(t_stack *a, t_stack *b, int end)
 		(a->tab[0] == median && len > 1) ? rot_a(a, 1) : 0;
 		len--;
 	}
-	while (b->tab[b->len - 1] != min && end != -1)
+	while (b->tab[b->len - 2] != min && end != -1)
 		revrot_b(b, 1);
 	if (a->len && a->tab[a->len - 1] == median)
-		revrot_a(a, 1);
+		revrot_ab(a, b, 1);
+	else if (b->tab[b->len - 1] != min && end != -1)
+		revrot_b(b, 1);
 }
 
 void		quick_sort(t_stack *a, t_stack *b)
@@ -121,7 +146,7 @@ void		quick_sort(t_stack *a, t_stack *b)
 		{
 			while (b->tab[i] != pivot && b->len > 1)
 				i++;
-			i < 10 ? revsort5(a, b, i) : quick_sort_b(a, b, i);
+			i < 20 ? revsort5(a, b, i) : quick_sort_b(a, b, i);
 		}
 		return ;
 	}
