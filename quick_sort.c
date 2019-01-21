@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 23:19:58 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/21 07:40:40 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/21 08:04:22 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void		quick_sort_a(t_stack *a, t_stack *b, int end)
 	else
 	{
 		if (b->len && b->tab[b->len - 1] == median)
-			revrot_b(b, 1);	
+			revrot_b(b, 1);
 		sort5(a, b);
 	}
 }
@@ -102,10 +102,7 @@ static void	quick_sort_b(t_stack *a, t_stack *b, int end)
 	int max;
 
 	min = b->tab[b->len - 1];
-	if (end == -1)
-		len = b->len;
-	else
-		len = end;
+	len = (end == -1) ? b->len : end;
 	median = get_median(*b, len);
 	max = get_max(*b);
 	while (len && median <= max)
@@ -129,7 +126,6 @@ static void	quick_sort_b(t_stack *a, t_stack *b, int end)
 void		quick_sort(t_stack *a, t_stack *b)
 {
 	int max;
-	int pivot;
 	int	i;
 
 	i = 0;
@@ -139,12 +135,12 @@ void		quick_sort(t_stack *a, t_stack *b)
 	(b->tab[0] == max && ft_issorted(a, 0, 0)) ? push_a(a, b, 1) : 0;
 	if (ft_issorted(a, 0, 0) && b->len > 0)
 	{
-		pivot = next_pivot(b);
-		if (pivot == b->tab[b->len - 1] && b->len > 2)
+		max = next_pivot(b);
+		if (max == b->tab[b->len - 1] && b->len > 2)
 			quick_sort_b(a, b, -1);
 		else
 		{
-			while (b->tab[i] != pivot && b->len > 1)
+			while (b->tab[i] != max && b->len > 1)
 				i++;
 			i < 20 ? revsort5(a, b, i) : quick_sort_b(a, b, i);
 		}
@@ -153,6 +149,5 @@ void		quick_sort(t_stack *a, t_stack *b)
 	i = 0;
 	while (!ft_issorted(a, 0, i))
 		i++;
-	if (!ft_issorted(a, 0, 0))
-		(i < 20) ? sort5(a, b) : quick_sort_a(a, b, i + 1);
+	(!ft_issorted(a, 0, 0)) ? quick_sort_a(a, b, i + 1) : 0;
 }
