@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 08:43:20 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/21 09:29:02 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/21 11:44:57 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,52 +41,33 @@ static int	get_operation(t_stack *a, t_stack *b, char *operation, t_visu *v)
 	return (v->on ? visualization(*a, *b, v) : 1);
 }
 
-static int	checker(t_stack *a, t_stack *b, t_visu *v)
+static void	checker(t_stack *a, t_stack *b, t_visu *v)
 {
 	char		*operation;
 	int			line;
-	static int	count = 0;
 
-	if (v->on)
+	while ((line = get_next_line(0, &operation)) > 0)
 	{
-		if ((line = get_next_line(0, &operation)) > 0)
+		if (!get_operation(a, b, operation, v))
 		{
-			if (!get_operation(a, b, operation, v))
-			{
-				free(operation);
-				write(2, "Error\n", 6);
-				return (0);
-			}
 			free(operation);
-			count++;
-		}
-	}
-	else
-	{
-		while ((line = get_next_line(0, &operation)) > 0)
-		{
-			if (!get_operation(a, b, operation, v))
-			{
-				free(operation);
-				write(2, "Error\n", 6);
-				return (0);
-			}
-			free(operation);
+			write(2, "Error\n", 6);
+			return ;
 		}
 		free(operation);
+		if (v->on)
+			break ;
 	}
+	free(operation);
 	line == 0 ? v->stop = 0 : 0;
 	if (ft_issorted(a, b->len, 0) && !v->stop)
 		write(1, "OK\n", 3);
 	else if (!v->stop)
 		write(1, "KO\n", 3);
-	return (count);
 }
 
 int			loop_hook(t_visu *v)
 {
-	int	count;
-
 	if (v->stop < 0)
 	{
 		if (v->slow == 1)
@@ -97,29 +78,39 @@ int			loop_hook(t_visu *v)
 		{
 			v->stop = 1;
 			visualization(v->a, v->b, v);
-			count = 0;
+			v->count = 0;
 		}
 		else
-			count = checker(&v->a, &v->b, v);
+			checker(&v->a, &v->b, v);
 		if (ft_issorted(&v->a, v->b.len, 0))
 			v->stop = 0;
 		mlx_put_image_to_window(v->mlx_ptr, v->win_ptr, v->img_ptr, 0, 0);
 		mlx_destroy_image(v->mlx_ptr, v->img_ptr);
-		mlx_string_put(v->mlx_ptr, v->win_ptr, 1000, 50, 0xFFFFFF, ft_itoa(count));
+		mlx_string_put(v->mlx_ptr, v->win_ptr, 1000, 50,
+				0xFFFFFF, ft_itoa(v->count));
 	}
 	return (0);
+}
+
+static void	visu_init(t_visu *v)
+{
+	v->stop = -2;
+	v->slow = -1;
+	v->b.len = 0;
+	v->count = 0;
+	v->mlx_ptr = mlx_init();
+	v->win_ptr = mlx_new_window(v->mlx_ptr, WIN_WIDTH, WIN_HEIGHT,
+			"PUSH_SWAP");
+	mlx_key_hook(v->win_ptr, key_hook, v);
+	mlx_loop_hook(v->mlx_ptr, loop_hook, v);
+	mlx_loop(v->mlx_ptr);
 }
 
 int			main(int argc, char **argv)
 {
 	t_visu	v;
-	int		check;
 
-	v.stop = -2;
-	v.slow = -1;
-	v.b.len = 0;
-	check = parser(&v.a, argv, argc, &v);
-	if (v.a.tab && check > 0)
+	if (v.a.tab && parser(&v.a, argv, argc, &v) > 0)
 	{
 		v.size = v.a.len;
 		if (!(v.b.tab = (int*)malloc(sizeof(int) * v.a.len)))
@@ -129,12 +120,7 @@ int			main(int argc, char **argv)
 		}
 		if (v.on)
 		{
-			v.mlx_ptr = mlx_init();
-			v.win_ptr = mlx_new_window(v.mlx_ptr, WIN_WIDTH, WIN_HEIGHT,
-					"PUSH_SWAP");
-			mlx_key_hook(v.win_ptr, key_hook, &v);
-			mlx_loop_hook(v.mlx_ptr, loop_hook, &v);
-			mlx_loop(v.mlx_ptr);
+			visu_init(&v);
 		}
 		checker(&v.a, &v.b, &v);
 		free(v.b.tab);

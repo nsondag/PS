@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 21:43:18 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/16 10:49:17 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/21 11:44:15 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,13 @@ int				parser(t_stack *a, char **argv, int argc, t_visu *v)
 	char	**tab;
 	int		min_arg;
 
-	min_arg = 2;
-	while (min_arg <= argc && argv[min_arg - 1][0] == '-')
+	min_arg = 1;
+	while (++min_arg <= argc && argv[min_arg - 1][0] == '-')
 	{
 		if (!ft_isdigit(argv[min_arg - 1][1]))
 			parse_option(argv[min_arg - 1], v);
 		else
 			break ;
-		min_arg++;
 	}
 	if (argc < min_arg)
 		return (0);
