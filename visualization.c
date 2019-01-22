@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 18:15:59 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/21 10:41:43 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/22 18:49:47 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int		key_hook(int keycode, t_visu *v)
 	if (keycode == 53)
 	{
 		mlx_destroy_window(v->mlx_ptr, v->win_ptr);
+		free(v->a.tab);
+		free(v->b.tab);
 		exit(0);
 	}
 	if (keycode == 49)

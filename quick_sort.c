@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 23:19:58 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/21 09:26:24 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/22 18:30:03 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,11 @@ static void	quick_sort_b(t_stack *a, t_stack *b, int end)
 		b->tab[0] >= median ? push_a(a, b, 1) : rot_b(b, 1);
 		(a->tab[0] == median) ? rot_a(a, 1) : 0;
 	}
-	while (b->tab[b->len - 2] != min && end != -1)
+	while (b->len - 2 >= 0 && b->tab[b->len - 2] != min && end != -1)
 		revrot_b(b, 1);
-	if (a->len && a->tab[a->len - 1] == median)
+	if (a->len - 1 >= 0 && a->tab[a->len - 1] == median)
 		revrot_ab(a, b, 1);
-	else if (b->tab[b->len - 1] != min && end != -1)
+	else if (b->len - 1 >= 0 && b->tab[b->len - 1] != min && end != -1)
 		revrot_b(b, 1);
 }
 
@@ -106,7 +106,7 @@ void		quick_sort(t_stack *a, t_stack *b)
 	if (ft_issorted(a, 0, 0) && b->len > 0)
 	{
 		max = next_pivot(b);
-		if (max == b->tab[b->len - 1] && b->len > 2)
+		if (b->len > 2 && max == b->tab[b->len - 1])
 			quick_sort_b(a, b, -1);
 		else
 		{

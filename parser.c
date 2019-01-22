@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 21:43:18 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/22 16:44:18 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/22 18:49:49 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int		check_validity(char **s)
 	return (1);
 }
 
-static void		parse_option(char *s, t_visu *v)
+static int		parse_option(char *s, t_visu *v)
 {
 	s++;
 	while (*s)
@@ -72,10 +72,11 @@ static void		parse_option(char *s, t_visu *v)
 		else
 		{
 			write(2, "Error\n", 6);
-			exit(0);
+			return (-1);
 		}
 		s++;
 	}
+	return (1);
 }
 
 static void		free_tab(char **tab)
@@ -97,11 +98,11 @@ int				parser(t_stack *a, char **argv, int argc, t_visu *v)
 	while (++min_arg <= argc && argv[min_arg - 1][0] == '-' && v)
 	{
 		if (!ft_isdigit(argv[min_arg - 1][1]))
-			parse_option(argv[min_arg - 1], v);
+			check = parse_option(argv[min_arg - 1], v);
 		else
 			break ;
 	}
-	if (argc < min_arg)
+	if (argc < min_arg || check < 0)
 		return (0);
 	if (argc == min_arg)
 	{
