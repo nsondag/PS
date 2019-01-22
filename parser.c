@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 21:43:18 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/22 13:58:39 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/22 16:44:18 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static t_stack	get_numbers(char **s)
 	stack.len = 0;
 	while (s[stack.len])
 		stack.len++;
-	if (!(stack.tab = (int*)malloc(sizeof(int) * stack.len)))
+	if (!(stack.tab = (int*)malloc(sizeof(int) * (stack.len + 1))))
 		stack.tab = NULL;
 	stack.len = 0;
 	while (stack.tab && s[stack.len])
