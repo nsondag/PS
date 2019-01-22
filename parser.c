@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 21:43:18 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/22 18:49:49 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/22 22:43:17 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ static t_stack	get_numbers(char **s)
 		while (j < stack.len && stack.tab)
 		{
 			if (stack.tab[j++] == stack.tab[stack.len])
+			{
+				free(stack.tab);
 				stack.tab = NULL;
+			}
 		}
 		stack.len++;
 	}
@@ -81,11 +84,12 @@ static int		parse_option(char *s, t_visu *v)
 
 static void		free_tab(char **tab)
 {
-	while (*tab)
-	{
-		free(*tab);
-		tab++;
-	}
+	int i;
+
+	i = 0;
+	while (tab[i])
+		free(tab[i++]);
+	free(tab);
 }
 
 int				parser(t_stack *a, char **argv, int argc, t_visu *v)
