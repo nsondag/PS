@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 21:43:18 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/21 12:12:46 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/22 13:37:41 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int		check_validity(char **s)
 		while (ft_isdigit(s[i][j]))
 			j++;
 		if (j > 11 || ft_atol(s[i]) > 2147483647 ||
-						ft_atol(s[i]) < -2147483648 || s[i][j])
+				ft_atol(s[i]) < -2147483648 || s[i][j])
 			return (0);
 		i++;
 	}
@@ -75,6 +75,15 @@ static void		parse_option(char *s, t_visu *v)
 			exit(0);
 		}
 		s++;
+	}
+}
+
+static void		free_tab(char **tab)
+{
+	while (*tab)
+	{
+		free(*tab);
+		tab++;
 	}
 }
 
@@ -99,12 +108,10 @@ int				parser(t_stack *a, char **argv, int argc, t_visu *v)
 		tab = ft_strsplit(argv[min_arg - 1], ' ');
 		check = check_validity(tab);
 		*a = get_numbers(tab);
-		free(tab);
+		free_tab(tab);
+		return ((check && a->tab) ? 1 : -1);
 	}
-	else
-	{
-		check = check_validity(&argv[min_arg - 1]);
-		*a = get_numbers(&argv[min_arg - 1]);
-	}
+	check = check_validity(&argv[min_arg - 1]);
+	*a = get_numbers(&argv[min_arg - 1]);
 	return ((check && a->tab) ? 1 : -1);
 }
