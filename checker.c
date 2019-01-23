@@ -6,7 +6,7 @@
 /*   By: nsondag <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 08:43:20 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/21 12:31:15 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/23 02:04:42 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,10 @@ static void	checker(t_stack *a, t_stack *b, t_visu *v)
 			write(2, "Error\n", 6);
 			return ;
 		}
-		free(operation);
+		v->count++;
 		if (v->on)
 			break ;
+		free(operation);
 	}
 	free(operation);
 	line == 0 ? v->stop = 0 : 0;
@@ -120,9 +121,7 @@ int			main(int argc, char **argv)
 			return (0);
 		}
 		if (v.on)
-		{
 			visu_init(&v);
-		}
 		checker(&v.a, &v.b, &v);
 		free(v.b.tab);
 		free(v.a.tab);
