@@ -6,7 +6,7 @@
 #    By: nsondag <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/05 12:33:09 by nsondag           #+#    #+#              #
-#    Updated: 2019/01/16 08:30:48 by nsondag          ###   ########.fr        #
+#    Updated: 2019/01/23 02:36:00 by nsondag          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,15 +31,17 @@ FRAME = -framework OpenGL -framework AppKit
 all: $(NAME1) $(NAME2)
 
 $(NAME1):
-	@make re -C libft
+	@make -C libft
 	@gcc -o $(NAME1) $(FLAGS) $(SRC) $(SRC1) libft/libft.a
 
 $(NAME2):
-	@make re -C libft
+	@make -C libft
+	@make -C mlx
 	@gcc -o $(NAME2) $(FLAGS) -I mlx -g -L mlx -lmlx $(FRAME) $(SRC) $(SRC2)\
 				libft/libft.a
 clean:
 	@make clean -C libft
+	@make clean -C mlx
 
 fclean: clean 
 	@make fclean -C libft
